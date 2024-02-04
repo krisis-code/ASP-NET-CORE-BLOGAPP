@@ -10,7 +10,7 @@ namespace Blog.Entity.Entities
     public class Article
     {
 
-        public Guid Id { get; set; }
+        
 
         public string Title { get; set; }
         
@@ -26,19 +26,7 @@ namespace Blog.Entity.Entities
 
         public Image Image { get; set; }
 
-        public string CreatedBy { get; set; }
         
-        public string ModifiedBy { get; set; }
-        
-        public string DeletedBy { get; set; }
-
-        public DateTime CreatedDate { get; set; }
-        
-        public DateTime ModifiedDate { get; set;}
-
-        public DateTime DeletedDate { get; set;}    
-
-        public bool IsDeleted { get; set; }
     
 
     }
