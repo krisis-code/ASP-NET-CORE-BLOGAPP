@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Blog.Core.Entities;
 
 namespace Blog.Entity.Entities
 {
-    public class Article
+    public class Article : EntityBase 
     {
-
-        
-
         public string Title { get; set; }
         
         public string Content { get; set; }
