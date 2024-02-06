@@ -36,12 +36,13 @@ namespace Blog.Data.Mappings
 
                 Category = new Category 
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("F9CD51AE-20DF-4DD7-BC5E-C9E58D6DA613"),
                     Name = "Asp.net core",
                     CreatedBy = "Admin Test",
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 },
+                CategoryId = Guid.Parse("F9CD51AE-20DF-4DD7-BC5E-C9E58D6DA613"),
                 Image = new Image 
                 {
                     Id = Guid.NewGuid(),
@@ -51,6 +52,7 @@ namespace Blog.Data.Mappings
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 },
+                ImageId = Guid.Parse("B93E0A19-EA35-4121-985A-5D2E33720DE4"),
                 CreatedBy = "Admin Test",
                 CreatedDate = DateTime.Now,
                 IsDeleted = false
@@ -79,12 +81,13 @@ namespace Blog.Data.Mappings
 
                 Category = new Category
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("FBFC4775-6074-4DD0-803F-192D426F70AE"),
                     Name = "Derinlemesine C#",
                     CreatedBy = "Admin Test",
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 },
+                CategoryId = Guid.Parse("FBFC4775-6074-4DD0-803F-192D426F70AE"),
                 Image = new Image
                 {
                     Id = Guid.NewGuid(),
@@ -94,6 +97,7 @@ namespace Blog.Data.Mappings
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 },
+                ImageId= Guid.Parse("717BA245-2468-4334-97D4-2B87E77351A5"),
                 CreatedBy = "Admin Test",
                 CreatedDate = DateTime.Now,
                 IsDeleted = false
@@ -123,12 +127,13 @@ namespace Blog.Data.Mappings
 
                 Category = new Category
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("2F635D41-AD10-4F31-A708-38D5F035E69B"),
                     Name = "Javascript Öğren",
                     CreatedBy = "Admin Test",
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 },
+                CategoryId = Guid.Parse("2F635D41-AD10-4F31-A708-38D5F035E69B"),
                 Image = new Image
                 {
                     Id = Guid.NewGuid(),
@@ -138,6 +143,7 @@ namespace Blog.Data.Mappings
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 },
+                ImageId = Guid.Parse("52D13349-E46B-4D2E-9053-92282B5F4911"),
                 CreatedBy = "Admin Test",
                 CreatedDate = DateTime.Now,
                 IsDeleted = false
@@ -166,12 +172,13 @@ namespace Blog.Data.Mappings
 
                 Category = new Category
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("45DB3E81-C868-459E-8234-F14913D9EA62"),
                     Name = "C++ Data struct",
                     CreatedBy = "Admin Test",
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 },
+                CategoryId = Guid.Parse("45DB3E81-C868-459E-8234-F14913D9EA62"),
                 Image = new Image
                 {
                     Id = Guid.NewGuid(),
@@ -181,6 +188,7 @@ namespace Blog.Data.Mappings
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 },
+                ImageId = Guid.Parse("A4C63D74-3640-4E31-A71C-6B24B1412CEE"),
                 CreatedBy = "Admin Test",
                 CreatedDate = DateTime.Now,
                 IsDeleted = false
@@ -209,12 +217,13 @@ namespace Blog.Data.Mappings
 
                 Category = new Category
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("DB9C2A0B-213E-4CB8-8F28-14EBC5677783"),
                     Name = "FullStack Development",
                     CreatedBy = "Admin Test",
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 },
+                CategoryId = Guid.Parse("DB9C2A0B-213E-4CB8-8F28-14EBC5677783"),
                 Image = new Image
                 {
                     Id = Guid.NewGuid(),
@@ -224,6 +233,7 @@ namespace Blog.Data.Mappings
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 },
+                ImageId = Guid.Parse("F222587B-CBB5-49D2-BDE4-973A2879BB67"),
                 CreatedBy = "Admin Test",
                 CreatedDate = DateTime.Now,
                 IsDeleted = false
