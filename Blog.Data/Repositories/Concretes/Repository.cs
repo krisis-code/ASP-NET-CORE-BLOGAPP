@@ -1,4 +1,5 @@
-﻿using Blog.Data.Context;
+﻿using Blog.Core.Entities;
+using Blog.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Data.Repositories.Concretes
 {
-    public class Repository
+    public class Repository <T> where T : class,IEntityBase,new()
     {
         private readonly AppDbContext dbContext;
 
@@ -16,7 +17,7 @@ namespace Blog.Data.Repositories.Concretes
         {
             this.dbContext = dbContext;
         }
-        private DbSet<T> Table { get => dbContext.Set<T>()}
+        private DbSet<T> Table { get => dbContext.Set<T>();   }
 
         public async Task addAsync(T entity)
         {
