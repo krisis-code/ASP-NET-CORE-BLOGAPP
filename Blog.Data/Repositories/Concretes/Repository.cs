@@ -44,9 +44,10 @@ namespace Blog.Data.Repositories.Concretes
             throw new NotImplementedException();
         }
 
-        public Task DeleteAsync(T entity)
+        public async Task DeleteAsync(T entity)
         {
-            throw new NotImplementedException();
+            await Task.Run(() => Table.Remove(entity));
+            
         }
 
         public async Task<T> GetAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
