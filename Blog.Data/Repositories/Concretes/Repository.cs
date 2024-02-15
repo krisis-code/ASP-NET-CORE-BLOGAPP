@@ -49,9 +49,16 @@ namespace Blog.Data.Repositories.Concretes
             throw new NotImplementedException();
         }
 
-        public Task<T> GetAsync(Expression<Func<T, bool>> predicate = null, params Expression<Func<T, object>>[] includeProperties)
+        public async Task<T> GetAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
         {
-            throw new NotImplementedException();
+            IQueryable<T> query = Table;
+            query = query.Where(predicate);
+
+            if (includeProperties.Any())
+                foreach (var item in includeProperties)
+                    query = query.Include(item);
+
+            return await query.SingleOrDefaultAsync();
         }
 
         public Task<T> GuidAsync(Guid id)
