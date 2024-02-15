@@ -34,12 +34,12 @@ namespace Blog.Data.Repositories.Concretes
             await Table.AddAsync(entity);
         }
 
-        public Task<bool> AnyAsync(Expression<Func<bool>> predicate)
+        public async Task<bool> AnyAsync(Expression<Func<T,bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await Table.AnyAsync(predicate);
         }
 
-        public Task<int> CountAsync(Expression<Func<int>> predicate = null)
+        public Task<int> CountAsync(Expression<Func<T,int>> predicate = null)
         {
             throw new NotImplementedException();
         }

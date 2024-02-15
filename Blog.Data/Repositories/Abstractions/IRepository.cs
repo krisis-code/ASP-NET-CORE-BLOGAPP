@@ -22,9 +22,9 @@ namespace Blog.Data.Repositories.Abstractions
 
         Task DeleteAsync(T entity);
 
-        Task<bool> AnyAsync(Expression<Func<bool>> predicate);
+        Task<bool> AnyAsync(Expression<Func<T,bool>> predicate);
 
-        Task<int> CountAsync(Expression<Func<int>> predicate = null);
+        Task<int> CountAsync(Expression<Func<T,int>> predicate = null);
 
     }
 }
