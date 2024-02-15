@@ -66,9 +66,11 @@ namespace Blog.Data.Repositories.Concretes
             return await Table.FindAsync(id);
         }
 
-        public Task<T> UpdateAsync(T entity)
+        public async Task<T> UpdateAsync(T entity)
         {
-            throw new NotImplementedException();
+            await Task.Run(() => Table.Update(entity));
+            return entity;
+
         }
     }
 }
