@@ -61,9 +61,9 @@ namespace Blog.Data.Repositories.Concretes
             return await query.SingleOrDefaultAsync();
         }
 
-        public Task<T> GuidAsync(Guid id)
+        public async Task<T> GuidAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await Table.FindAsync(id);
         }
 
         public Task<T> UpdateAsync(T entity)
