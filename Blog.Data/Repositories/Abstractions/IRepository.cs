@@ -12,5 +12,18 @@ namespace Blog.Data.Repositories.Abstractions
     {
         Task addAsync(T entity);
         Task<List<T>> GetAllAsync(Expression<Func<T, bool>> predicate = null, params Expression<Func<T, object>>[] includeProperties);
+
+        Task<T> GetAsync(Expression<Func<T, bool>> predicate = null, params Expression<Func<T, object>>[] includeProperties);
+
+        Task<T> GuidAsync(Guid id);
+
+        Task<T> UpdateAsync(T entity);
+
+        Task DeleteAsync(T entity);
+
+        Task<bool> AnyAsync(Expression<Func<bool>> predicate);
+
+        Task<int> CountAsync(Expression<Func<int>> predicate = null);
+
     }
 }
