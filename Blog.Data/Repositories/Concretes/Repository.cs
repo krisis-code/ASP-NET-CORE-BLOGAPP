@@ -39,9 +39,9 @@ namespace Blog.Data.Repositories.Concretes
             return await Table.AnyAsync(predicate);
         }
 
-        public Task<int> CountAsync(Expression<Func<T,int>> predicate = null)
+        public Task<int> CountAsync(Expression<Func<T,bool>> predicate = null)
         {
-            throw new NotImplementedException();
+            return Table.CountAsync(predicate);
         }
 
         public async Task DeleteAsync(T entity)

@@ -24,7 +24,7 @@ namespace Blog.Data.Repositories.Abstractions
 
         Task<bool> AnyAsync(Expression<Func<T,bool>> predicate);
 
-        Task<int> CountAsync(Expression<Func<T,int>> predicate = null);
+        Task<int> CountAsync(Expression<Func<T,bool>> predicate = null);
 
     }
 }
