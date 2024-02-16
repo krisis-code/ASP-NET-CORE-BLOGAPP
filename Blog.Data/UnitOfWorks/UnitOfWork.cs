@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace Blog.Data.UnitOfWorks
 {
-    public class UnitOfWorks : IUnitOfWorks
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly AppDbContext dbContext;
-        public UnitOfWorks(AppDbContext dbContext)
+        public UnitOfWork(AppDbContext dbContext)
         {
            this.dbContext = dbContext;
         }
@@ -31,7 +31,7 @@ namespace Blog.Data.UnitOfWorks
             return await dbContext.SaveChangesAsync();
         }
 
-        IRepository<T> IUnitOfWorks.GetRepository<T>()
+        IRepository<T> IUnitOfWork.GetRepository<T>()
         {
             return new Repository<T>(dbContext);
         }
