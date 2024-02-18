@@ -1,13 +1,21 @@
 ﻿using Blog.Data.Repositories.Abstractions;
 using Blog.Entity.Entities;
+using Blog.Data.UnitOfWorks;
 
 namespace Blog.Data.Repositories.Concretes
 {
+    
     public class ArticleService : IArticleService
     {
-        public Task<List<Article>> GetAllArticlesAsync()
+        private readonly IUnitOfWork unitOfWork;
+
+        public ArticleService(IUnitOfWork unitOfWork)
         {
-            throw new NotImplementedException();
+            this.unitOfWork = unitOfWork;
+        }
+        public async Task<List<Article>> GetAllArticlesAsync()
+        {
+            return await unitOfWork.GetRepository<Article>().GetAllAsync();
         }
     }
 }
