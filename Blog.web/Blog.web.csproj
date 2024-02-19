@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Blog.Service\Blog.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Models\" />
+  </ItemGroup>
+
 </Project>
