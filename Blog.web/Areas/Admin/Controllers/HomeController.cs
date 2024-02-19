@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.web.Areas.Admin.Controllers
 {
-    [Area("Admin")]
     public class HomeController : Controller
     {
         private readonly IArticleService articleService;
