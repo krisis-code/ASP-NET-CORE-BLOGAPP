@@ -1,12 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Blog.Data.Repositories.Abstractions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.web.Areas.Admin.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IArticleService articleService;
+
+        public HomeController(IArticleService articleService)
         {
-            return View();
+            this.articleService = articleService;
+        }
+        public  async Task<IActionResult> Index( )
+        {
+            var articles = await articleService.GetAllArticlesAsync();
+            return View(articles);
         }
     }
 }
