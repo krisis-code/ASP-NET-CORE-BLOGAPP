@@ -1,12 +1,11 @@
-﻿using Blog.Entity.Entities;
-using System.Linq.Expressions;
+﻿using Blog.Entity.DTOs.Articles;
 
 namespace Blog.Data.Repositories.Abstractions
 {
     public interface IArticleService
     {
 
-        Task<List<Article>> GetAllArticlesAsync();
+        Task<List<ArticleDto>> GetAllArticlesAsync();
 
     }
 }
