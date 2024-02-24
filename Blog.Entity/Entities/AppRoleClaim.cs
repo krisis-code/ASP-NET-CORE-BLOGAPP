@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Blog.Entity.Entities
 {
-    public class AppRoleClaim
+    public class AppRoleClaim : IdentityRoleClaim<Guid>
     {
     }
 }
