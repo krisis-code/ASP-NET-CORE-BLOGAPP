@@ -11,7 +11,7 @@ namespace Blog.Data.Mappings
 {
     public class UserLoginMap : IEntityTypeConfiguration<AppUserLogin>
     {
-        //UserClaimMap class IEntityTypeConfiguration türetildi ve appuser dan implamente edildi ve configre edildi
+        
         public void Configure(EntityTypeBuilder<AppUserLogin> builder)
         {
             // Composite primary key consisting of the LoginProvider and the key to use

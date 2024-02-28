@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Data.Mappings
 {
-    public class RoleClaimMap
+    public class RoleClaimMap 
     {
     }
 }
