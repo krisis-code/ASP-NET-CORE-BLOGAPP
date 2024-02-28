@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Blog.Data.Context
 {
-    public class AppDbContext : IdentityDbContext
+    public class AppDbContext : IdentityDbContext<AppUser,AppRole,Guid,AppUserClaim,AppUserRole,AppUserLogin,AppRoleClaim,AppUserToken>
     {
         protected AppDbContext()
         {
