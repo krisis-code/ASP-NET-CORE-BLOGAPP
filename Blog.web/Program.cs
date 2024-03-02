@@ -20,6 +20,10 @@ builder.Services.AddIdentity<AppUser, AppRole>(opt =>
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
+builder.Services.ConfigureApplicationCookie(config =>
+{
+    config.LoginPath = new PathString("/Admin/Aut/login");
+});
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
