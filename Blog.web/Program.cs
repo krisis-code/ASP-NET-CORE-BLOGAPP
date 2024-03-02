@@ -22,7 +22,8 @@ builder.Services.AddIdentity<AppUser, AppRole>(opt =>
 
 builder.Services.ConfigureApplicationCookie(config =>
 {
-    config.LoginPath = new PathString("/Admin/Aut/login");
+    config.LoginPath = new PathString("/Admin/Auth/login");
+    config.LogoutPath = new PathString("/Admin/Auth/Logout");
 });
 
 var app = builder.Build();
