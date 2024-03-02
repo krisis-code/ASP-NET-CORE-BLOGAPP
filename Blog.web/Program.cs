@@ -31,6 +31,9 @@ builder.Services.ConfigureApplicationCookie(config =>
         SameSite = SameSiteMode.Strict,
         SecurePolicy = CookieSecurePolicy.SameAsRequest
     };
+    config.SlidingExpiration = true;
+    config.ExpireTimeSpan = TimeSpan.FromDays(7);
+    config.AccessDeniedPath = new PathString("/Admin/Auth/AccesDenied");
 });
 
 var app = builder.Build();
