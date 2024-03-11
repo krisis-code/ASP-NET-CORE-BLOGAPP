@@ -53,21 +53,21 @@ namespace Blog.Data.Migrations
                         new
                         {
                             Id = new Guid("ac2bfb1d-dfaa-4057-bb71-b5718a312cd9"),
-                            ConcurrencyStamp = "a5bfdd50-f7a7-4242-b221-f46972ae4dc8",
+                            ConcurrencyStamp = "54a6bdd7-2ca6-414a-bcc6-9b555b113e0d",
                             Name = "SuperAdmin",
                             NormalizedName = "SUPERADMIN"
                         },
                         new
                         {
                             Id = new Guid("d0bc7ad4-d344-4f5e-a18c-a9538730f007"),
-                            ConcurrencyStamp = "5a77a207-05d1-454f-abe3-9797c6c73432",
+                            ConcurrencyStamp = "4cf40f27-385a-4988-9762-0b548f0f31bf",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("1348ca82-0ea9-4de9-a08e-f21fc9f5906a"),
-                            ConcurrencyStamp = "19507066-6ff3-4bf6-843e-d64958acfdb9",
+                            ConcurrencyStamp = "c85111a8-15c2-410b-a3db-9da9e5ba40d2",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -106,6 +106,9 @@ namespace Blog.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("AppUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -120,6 +123,9 @@ namespace Blog.Data.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ImageId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -160,6 +166,10 @@ namespace Blog.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("ImageId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -175,18 +185,19 @@ namespace Blog.Data.Migrations
                         {
                             Id = new Guid("cb94223b-ccb8-4f2f-93d7-0df96a7f065c"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8ece994c-0274-47fe-8598-7b177c38c556",
+                            ConcurrencyStamp = "9e72190d-7200-4f8e-b0d8-c35bc3f4c366",
                             Email = "superadmin@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Cem",
+                            ImageId = new Guid("b93e0a19-ea35-4121-985a-5d2e33720de4"),
                             LastName = "Keskin",
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPERADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDXpjnHlYOH7bpLfSEo/s8uBUQHQLe0RlSu/alPJlAWLTK0Y15JZ26Q8wlAgY1gsWg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEbcMT7hA4IB3/3t2huu/ccNYoQYVmxsvvRZdh4oOAsgXl31oAdL1KkoEl7TktfSOw==",
                             PhoneNumber = "+905439999999",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "4e29042a-3232-43ba-9ad0-ab4cd2bc0bdc",
+                            SecurityStamp = "d7fb8593-179b-4818-809b-ba08ceb0f42c",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@gmail.com"
                         },
@@ -194,18 +205,19 @@ namespace Blog.Data.Migrations
                         {
                             Id = new Guid("3aa42229-1c0f-4630-8c1a-db879ecd0427"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7ce8586e-5b04-4679-944e-c5938a5a004b",
+                            ConcurrencyStamp = "d433c953-78c6-4552-8c1c-c02127d55b12",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
+                            ImageId = new Guid("717ba245-2468-4334-97d4-2b87e77351a5"),
                             LastName = "User",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEAmIxxc0mbCI4qpP2pD35TMyHHhYs8/nbrx2P/FkH6ARC3dEptMYe7csUs7exSZZQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEB8TiBwu2FsYwvZvmAVlIs49VjK8O+Zg5VGl0p3IPJRkJLjhSaP/tOZR+gdHXIdbEA==",
                             PhoneNumber = "+905439999988",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d6e3ff83-80da-44af-ad54-90c73804d9dd",
+                            SecurityStamp = "1a5175c0-d3a9-4bcc-add0-e23e043c2d64",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         });
@@ -329,7 +341,7 @@ namespace Blog.Data.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("ImageId")
+                    b.Property<Guid?>("ImageId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsDeleted")
@@ -345,6 +357,9 @@ namespace Blog.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("ViewCount")
                         .HasColumnType("int");
 
@@ -354,67 +369,74 @@ namespace Blog.Data.Migrations
 
                     b.HasIndex("ImageId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Articles");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e996935c-1335-4a77-9320-cb33e3085fce"),
+                            Id = new Guid("310309c4-deef-4768-90d6-eedc7d28b879"),
                             CategoryId = new Guid("f9cd51ae-20df-4dd7-bc5e-c9e58d6da613"),
                             Content = "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.\r\n\r\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.",
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 2, 28, 22, 31, 40, 735, DateTimeKind.Local).AddTicks(6465),
+                            CreatedDate = new DateTime(2024, 3, 11, 23, 3, 42, 485, DateTimeKind.Local).AddTicks(1050),
                             ImageId = new Guid("b93e0a19-ea35-4121-985a-5d2e33720de4"),
                             IsDeleted = false,
                             Title = "Asp.net core",
+                            UserId = new Guid("cb94223b-ccb8-4f2f-93d7-0df96a7f065c"),
                             ViewCount = 30
                         },
                         new
                         {
-                            Id = new Guid("e0e81dcf-b21b-4346-aa00-cef20aaebd79"),
+                            Id = new Guid("3e735c04-2dfb-4973-8ed5-c111d186f2cd"),
                             CategoryId = new Guid("fbfc4775-6074-4dd0-803f-192d426f70ae"),
                             Content = "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.\r\n\r\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.",
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 2, 28, 22, 31, 40, 735, DateTimeKind.Local).AddTicks(6471),
+                            CreatedDate = new DateTime(2024, 3, 11, 23, 3, 42, 485, DateTimeKind.Local).AddTicks(1057),
                             ImageId = new Guid("717ba245-2468-4334-97d4-2b87e77351a5"),
                             IsDeleted = false,
                             Title = "Derinlemesine C#",
+                            UserId = new Guid("cb94223b-ccb8-4f2f-93d7-0df96a7f065c"),
                             ViewCount = 15
                         },
                         new
                         {
-                            Id = new Guid("f1109a60-3bf4-4e9b-9e37-ebf71c34cb13"),
+                            Id = new Guid("5cbe7a91-95e9-409d-bfe4-a9e06dda7935"),
                             CategoryId = new Guid("2f635d41-ad10-4f31-a708-38d5f035e69b"),
                             Content = "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.\r\n\r\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.",
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 2, 28, 22, 31, 40, 735, DateTimeKind.Local).AddTicks(6489),
+                            CreatedDate = new DateTime(2024, 3, 11, 23, 3, 42, 485, DateTimeKind.Local).AddTicks(1062),
                             ImageId = new Guid("52d13349-e46b-4d2e-9053-92282b5f4911"),
                             IsDeleted = false,
                             Title = "Javascript Öğren",
+                            UserId = new Guid("cb94223b-ccb8-4f2f-93d7-0df96a7f065c"),
                             ViewCount = 35
                         },
                         new
                         {
-                            Id = new Guid("de0c1cc7-5ee9-4575-aadf-3da23c5dd924"),
+                            Id = new Guid("3a8dab5d-46dd-4da2-b429-e6b2a7b950d8"),
                             CategoryId = new Guid("45db3e81-c868-459e-8234-f14913d9ea62"),
                             Content = "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.\r\n\r\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.",
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 2, 28, 22, 31, 40, 735, DateTimeKind.Local).AddTicks(6493),
+                            CreatedDate = new DateTime(2024, 3, 11, 23, 3, 42, 485, DateTimeKind.Local).AddTicks(1080),
                             ImageId = new Guid("a4c63d74-3640-4e31-a71c-6b24b1412cee"),
                             IsDeleted = false,
                             Title = "C++ Data struct",
+                            UserId = new Guid("cb94223b-ccb8-4f2f-93d7-0df96a7f065c"),
                             ViewCount = 45
                         },
                         new
                         {
-                            Id = new Guid("beead1e3-6dc6-4290-bdbb-6f45e7b13ede"),
+                            Id = new Guid("0723f880-f80b-465e-a732-1504fc5e1edc"),
                             CategoryId = new Guid("db9c2a0b-213e-4cb8-8f28-14ebc5677783"),
                             Content = "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.\r\n\r\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.",
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 2, 28, 22, 31, 40, 735, DateTimeKind.Local).AddTicks(6498),
+                            CreatedDate = new DateTime(2024, 3, 11, 23, 3, 42, 485, DateTimeKind.Local).AddTicks(1085),
                             ImageId = new Guid("f222587b-cbb5-49d2-bde4-973a2879bb67"),
                             IsDeleted = false,
                             Title = "FullStack Development",
+                            UserId = new Guid("cb94223b-ccb8-4f2f-93d7-0df96a7f065c"),
                             ViewCount = 105
                         });
                 });
@@ -459,7 +481,7 @@ namespace Blog.Data.Migrations
                         {
                             Id = new Guid("f9cd51ae-20df-4dd7-bc5e-c9e58d6da613"),
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 2, 28, 22, 31, 40, 735, DateTimeKind.Local).AddTicks(7979),
+                            CreatedDate = new DateTime(2024, 3, 11, 23, 3, 42, 485, DateTimeKind.Local).AddTicks(2557),
                             IsDeleted = false,
                             Name = "Asp.net core"
                         },
@@ -467,7 +489,7 @@ namespace Blog.Data.Migrations
                         {
                             Id = new Guid("fbfc4775-6074-4dd0-803f-192d426f70ae"),
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 2, 28, 22, 31, 40, 735, DateTimeKind.Local).AddTicks(7983),
+                            CreatedDate = new DateTime(2024, 3, 11, 23, 3, 42, 485, DateTimeKind.Local).AddTicks(2561),
                             IsDeleted = false,
                             Name = "Derinlemesine C#"
                         },
@@ -475,7 +497,7 @@ namespace Blog.Data.Migrations
                         {
                             Id = new Guid("2f635d41-ad10-4f31-a708-38d5f035e69b"),
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 2, 28, 22, 31, 40, 735, DateTimeKind.Local).AddTicks(7986),
+                            CreatedDate = new DateTime(2024, 3, 11, 23, 3, 42, 485, DateTimeKind.Local).AddTicks(2564),
                             IsDeleted = false,
                             Name = "Javascript Öğren"
                         },
@@ -483,7 +505,7 @@ namespace Blog.Data.Migrations
                         {
                             Id = new Guid("45db3e81-c868-459e-8234-f14913d9ea62"),
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 2, 28, 22, 31, 40, 735, DateTimeKind.Local).AddTicks(7992),
+                            CreatedDate = new DateTime(2024, 3, 11, 23, 3, 42, 485, DateTimeKind.Local).AddTicks(2570),
                             IsDeleted = false,
                             Name = "C++ Data struct"
                         },
@@ -491,7 +513,7 @@ namespace Blog.Data.Migrations
                         {
                             Id = new Guid("db9c2a0b-213e-4cb8-8f28-14ebc5677783"),
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 2, 28, 22, 31, 40, 735, DateTimeKind.Local).AddTicks(7995),
+                            CreatedDate = new DateTime(2024, 3, 11, 23, 3, 42, 485, DateTimeKind.Local).AddTicks(2573),
                             IsDeleted = false,
                             Name = "FullStack Development"
                         });
@@ -541,7 +563,7 @@ namespace Blog.Data.Migrations
                         {
                             Id = new Guid("b93e0a19-ea35-4121-985a-5d2e33720de4"),
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 2, 28, 22, 31, 40, 735, DateTimeKind.Local).AddTicks(9338),
+                            CreatedDate = new DateTime(2024, 3, 11, 23, 3, 42, 485, DateTimeKind.Local).AddTicks(3870),
                             FileName = "images/1",
                             FileType = "png",
                             IsDeleted = false
@@ -550,7 +572,7 @@ namespace Blog.Data.Migrations
                         {
                             Id = new Guid("717ba245-2468-4334-97d4-2b87e77351a5"),
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 2, 28, 22, 31, 40, 735, DateTimeKind.Local).AddTicks(9343),
+                            CreatedDate = new DateTime(2024, 3, 11, 23, 3, 42, 485, DateTimeKind.Local).AddTicks(3875),
                             FileName = "images/23",
                             FileType = "png",
                             IsDeleted = false
@@ -559,7 +581,7 @@ namespace Blog.Data.Migrations
                         {
                             Id = new Guid("52d13349-e46b-4d2e-9053-92282b5f4911"),
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 2, 28, 22, 31, 40, 735, DateTimeKind.Local).AddTicks(9348),
+                            CreatedDate = new DateTime(2024, 3, 11, 23, 3, 42, 485, DateTimeKind.Local).AddTicks(3878),
                             FileName = "images/3",
                             FileType = "png",
                             IsDeleted = false
@@ -568,7 +590,7 @@ namespace Blog.Data.Migrations
                         {
                             Id = new Guid("a4c63d74-3640-4e31-a71c-6b24b1412cee"),
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 2, 28, 22, 31, 40, 735, DateTimeKind.Local).AddTicks(9351),
+                            CreatedDate = new DateTime(2024, 3, 11, 23, 3, 42, 485, DateTimeKind.Local).AddTicks(3881),
                             FileName = "images/4",
                             FileType = "png",
                             IsDeleted = false
@@ -577,7 +599,7 @@ namespace Blog.Data.Migrations
                         {
                             Id = new Guid("f222587b-cbb5-49d2-bde4-973a2879bb67"),
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 2, 28, 22, 31, 40, 735, DateTimeKind.Local).AddTicks(9355),
+                            CreatedDate = new DateTime(2024, 3, 11, 23, 3, 42, 485, DateTimeKind.Local).AddTicks(3884),
                             FileName = "images/5",
                             FileType = "png",
                             IsDeleted = false
@@ -591,6 +613,21 @@ namespace Blog.Data.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Blog.Entity.Entities.AppUser", b =>
+                {
+                    b.HasOne("Blog.Entity.Entities.AppUser", null)
+                        .WithMany("Users")
+                        .HasForeignKey("AppUserId");
+
+                    b.HasOne("Blog.Entity.Entities.Image", "Image")
+                        .WithMany("Users")
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("Blog.Entity.Entities.AppUserClaim", b =>
@@ -645,13 +682,26 @@ namespace Blog.Data.Migrations
 
                     b.HasOne("Blog.Entity.Entities.Image", "Image")
                         .WithMany("Articles")
-                        .HasForeignKey("ImageId")
+                        .HasForeignKey("ImageId");
+
+                    b.HasOne("Blog.Entity.Entities.AppUser", "User")
+                        .WithMany("Articles")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
 
                     b.Navigation("Image");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Blog.Entity.Entities.AppUser", b =>
+                {
+                    b.Navigation("Articles");
+
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("Blog.Entity.Entities.Category", b =>
@@ -662,6 +712,8 @@ namespace Blog.Data.Migrations
             modelBuilder.Entity("Blog.Entity.Entities.Image", b =>
                 {
                     b.Navigation("Articles");
+
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Blog.Data.Mappings
 {
@@ -79,7 +80,7 @@ namespace Blog.Data.Mappings
                 PhoneNumberConfirmed = false,
                 EmailConfirmed = false,
                 SecurityStamp = Guid.NewGuid().ToString(),
-                ImageId = Guid.Parse("B93E0A19-EA35-4121-985A-5D2E33720DE4")
+                ImageId= Guid.Parse("717BA245-2468-4334-97D4-2B87E77351A5")
                 //ImageId = Guid.Parse("D16A6EC7-8C50-4AB0-89A5-02B9A551F0FA")
             };
             admin.PasswordHash = CreatePasswordHash(admin, "123456");
