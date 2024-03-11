@@ -61,7 +61,8 @@ namespace Blog.Data.Mappings
                 PhoneNumberConfirmed = true,
                 EmailConfirmed = true,
                 SecurityStamp = Guid.NewGuid().ToString(),
-                 //= Guid.Parse("F71F4B9A-AA60-461D-B398-DE31001BF214")
+                ImageId = Guid.Parse("B93E0A19-EA35-4121-985A-5D2E33720DE4")
+                //= Guid.Parse("F71F4B9A-AA60-461D-B398-DE31001BF214")
             };
             superadmin.PasswordHash = CreatePasswordHash(superadmin, "123456");
 
@@ -78,6 +79,7 @@ namespace Blog.Data.Mappings
                 PhoneNumberConfirmed = false,
                 EmailConfirmed = false,
                 SecurityStamp = Guid.NewGuid().ToString(),
+                ImageId = Guid.Parse("B93E0A19-EA35-4121-985A-5D2E33720DE4")
                 //ImageId = Guid.Parse("D16A6EC7-8C50-4AB0-89A5-02B9A551F0FA")
             };
             admin.PasswordHash = CreatePasswordHash(admin, "123456");

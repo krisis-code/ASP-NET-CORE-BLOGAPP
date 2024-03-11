@@ -37,8 +37,9 @@ namespace Blog.Data.Mappings
                 ImageId = Guid.Parse("B93E0A19-EA35-4121-985A-5D2E33720DE4"),
                 CreatedBy = "Admin Test",
                 CreatedDate = DateTime.Now,
-                IsDeleted = false
-            
+                IsDeleted = false,
+                UserId = Guid.Parse("CB94223B-CCB8-4F2F-93D7-0DF96A7F065C")
+
             },
             new Article
             {
@@ -67,7 +68,8 @@ namespace Blog.Data.Mappings
                 ImageId= Guid.Parse("717BA245-2468-4334-97D4-2B87E77351A5"),
                 CreatedBy = "Admin Test",
                 CreatedDate = DateTime.Now,
-                IsDeleted = false
+                IsDeleted = false,
+                UserId = Guid.Parse("CB94223B-CCB8-4F2F-93D7-0DF96A7F065C")
 
 
             },
@@ -98,7 +100,8 @@ namespace Blog.Data.Mappings
                 ImageId = Guid.Parse("52D13349-E46B-4D2E-9053-92282B5F4911"),
                 CreatedBy = "Admin Test",
                 CreatedDate = DateTime.Now,
-                IsDeleted = false
+                IsDeleted = false,
+                UserId = Guid.Parse("CB94223B-CCB8-4F2F-93D7-0DF96A7F065C")
 
             },
             new Article
@@ -127,7 +130,8 @@ namespace Blog.Data.Mappings
                 ImageId = Guid.Parse("A4C63D74-3640-4E31-A71C-6B24B1412CEE"),
                 CreatedBy = "Admin Test",
                 CreatedDate = DateTime.Now,
-                IsDeleted = false
+                IsDeleted = false,
+                UserId = Guid.Parse("CB94223B-CCB8-4F2F-93D7-0DF96A7F065C")
 
             },
             new Article
@@ -155,7 +159,8 @@ namespace Blog.Data.Mappings
                 ImageId = Guid.Parse("F222587B-CBB5-49D2-BDE4-973A2879BB67"),
                 CreatedBy = "Admin Test",
                 CreatedDate = DateTime.Now,
-                IsDeleted = false
+                IsDeleted = false,
+                UserId = Guid.Parse("CB94223B-CCB8-4F2F-93D7-0DF96A7F065C")
             });
         }
     }
