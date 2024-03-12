@@ -14,9 +14,16 @@ namespace Blog.web.Areas.Admin.Controllers
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Login()
         {
             return View();
         }
+
+    //    [HttpPost]
+    //    public IActionResult Login()
+    //    {
+    //        return View();
+    //    }
     }
 }
