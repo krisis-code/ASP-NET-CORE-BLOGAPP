@@ -1,5 +1,6 @@
 ﻿using Blog.Entity.DTOs.Users;
 using Blog.Entity.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +22,7 @@ namespace Blog.web.Areas.Admin.Controllers
         {
             return View();
         }
-
+        [AllowAnonymous]
         [HttpPost]
         public async Task <IActionResult> Login(UserLoginDto userLoginDto)
         {
