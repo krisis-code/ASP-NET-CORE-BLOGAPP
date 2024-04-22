@@ -1,4 +1,5 @@
-﻿using Blog.Entity.Entities;
+﻿using Blog.Entity.DTOs.Users;
+using Blog.Entity.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,9 +23,35 @@ namespace Blog.web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task <IActionResult> Login()
+        public async Task <IActionResult> Login(UserLoginDto userLoginDto)
         {
-            return View();
+            if(ModelState.IsValid)
+            {
+                var user = await userManager.FindByEmailAsync(userLoginDto.Email);
+                if (user != null) 
+                {
+                    var result = await signInManager.PasswordSignInAsync(user, userLoginDto.Password, userLoginDto.RememberMe, false);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index", "Home", new { Area = "Admin" });
+                    }
+                    else 
+                    {
+                        ModelState.AddModelError("", "E-posta adresiniz yada şifreniz yanlış");
+                        return View();
+                    }
+                }
+                else 
+                {
+                    ModelState.AddModelError("", "E-posta adresiniz yada şifreniz yanlış");
+                    return View();
+                }
+            }
+            else
+            {
+                return View();
+
+            }
         }
     }
 }
