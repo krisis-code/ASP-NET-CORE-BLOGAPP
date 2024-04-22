@@ -21,10 +21,10 @@ namespace Blog.web.Areas.Admin.Controllers
             return View();
         }
 
-    //    [HttpPost]
-    //    public IActionResult Login()
-    //    {
-    //        return View();
-    //    }
+        [HttpPost]
+        public async Task <IActionResult> Login()
+        {
+            return View();
+        }
     }
 }
