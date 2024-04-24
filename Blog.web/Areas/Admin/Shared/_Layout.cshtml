@@ -1,4 +1,5 @@
-﻿
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 
 
 <html lang="en" class="light-style layout-menu-fixed " dir="ltr" data-theme="theme-default" data-template="vertical-menu-template-free">
@@ -144,8 +145,8 @@
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">SAYFA YÖNETİMİ</span>
                     </li>
-                    <li class="menu-item">
-                        <a asp-area="Admin" asp-controller="Article" asp-action="Index" class="menu-link">
+                    <li class="menu-item" asp-area="Admin" asp-controller="Article" asp-action="Index">
+                        <a  asp-area="Admin" asp-controller="Article" asp-action="Index" class="menu-link">
                             <i class='menu-icon bx bx-paper-plane'></i>
                             <div data-i18n="Analytics">Makale Yönetimi</div>
                         </a>
