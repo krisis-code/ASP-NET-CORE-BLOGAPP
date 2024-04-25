@@ -6,12 +6,12 @@
 
         public string Title { get; set; }
 
-        public string Content { get; set; }
+        public string Category { get; set; }
 
-        public int ViewCount { get; set; }
-        
         public DateTime CreatedDate { get; set; }   
     
         public string CreatedBy { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }
