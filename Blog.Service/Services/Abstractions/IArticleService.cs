@@ -5,7 +5,7 @@ namespace Blog.Data.Repositories.Abstractions
     public interface IArticleService
     {
 
-        Task<List<ArticleDto>> GetAllArticlesAsync();
+        Task<List<ArticleDto>> GetAllArticlesWithCategoryNonDeletedAsync();
 
     }
 }
