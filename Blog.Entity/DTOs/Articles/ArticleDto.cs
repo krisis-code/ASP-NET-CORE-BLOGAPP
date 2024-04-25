@@ -1,4 +1,6 @@
-﻿namespace Blog.Entity.DTOs.Articles
+﻿using Blog.Entity.DTOs.Categories;
+
+namespace Blog.Entity.DTOs.Articles
 {
     public class ArticleDto
     {
@@ -6,7 +8,7 @@
 
         public string Title { get; set; }
 
-        public string Category { get; set; }
+        public CategoryDto Category { get; set; }
 
         public DateTime CreatedDate { get; set; }   
     
