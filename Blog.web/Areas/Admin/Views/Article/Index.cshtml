@@ -1,4 +1,7 @@
-﻿<div class="container-xxl flex-grow-1 container-p-y">
+﻿
+@model List<ArticleDto>
+
+<div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4">
         <span class="text-muted fw-light">Makale Yönetimi /</span> Makaleler
     </h4>
@@ -31,7 +34,16 @@
                     </tr>
                 </tfoot>
                 <tbody class="table-border-bottom-0">
-              
+                @foreach (var article in Model)
+                    {
+                        <tr name="@article.Id" >
+                            <th>@article.Title</th>
+                            <th>@article.Category.Name</th>
+                            <th>@article.CreatedDate.ToShortDateString()</th>
+                            <th>@article.CreatedBy</th>  
+                            <th>@(article.IsDeleted ? "Pasif" : "Aktif")</th>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
