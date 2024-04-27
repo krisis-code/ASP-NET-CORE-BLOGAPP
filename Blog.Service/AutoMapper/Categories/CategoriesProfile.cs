@@ -16,7 +16,6 @@ namespace Blog.Service.AutoMapper.Categories
         {
             CreateMap<CategoryDto, Category>().ReverseMap();
 
-            //aa
         }
     }
 }
