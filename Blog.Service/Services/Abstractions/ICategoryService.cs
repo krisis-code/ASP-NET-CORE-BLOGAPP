@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Service.Services.Abstractions
 {
-    public interface ICatergoryService
+    public interface ICategoryService
     {
         public Task<List<CategoryDto>> GetAllCategoriesNonDeleted();
     }
