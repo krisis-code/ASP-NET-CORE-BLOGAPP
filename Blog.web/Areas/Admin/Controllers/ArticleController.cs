@@ -28,5 +28,12 @@ namespace Blog.web.Areas.Admin.Controllers
             var categories = await categoryService.GetAllCategoriesNonDeleted();
             return View(new ArticleAddDto { Categories = categories} ); 
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(ArticleAddDto articleAddDto)
+        {
+            var categories = await categoryService.GetAllCategoriesNonDeleted();
+            return View(new ArticleAddDto { Categories = categories });
+        }
     }
 }

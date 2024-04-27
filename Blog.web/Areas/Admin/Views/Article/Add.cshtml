@@ -20,7 +20,7 @@
                                 Ekle <i class="bx bx-plus"></i>
                             </a>
 
-                            <select id="categoryList" class="form-control" asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories,"Id","Name") )"></select>
+                            <select id="categoryList" class="form-control mb-3" asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories,"Id","Name") )"></select>
                             <span asp-validation-for="CategoryId" class="text-danger"></span>
 
                         </div>
