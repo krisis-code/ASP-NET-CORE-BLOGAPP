@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Service.Services.Concretes
 {
-    internal class CatergoryService
+    public class CatergoryService
     {
     }
 }

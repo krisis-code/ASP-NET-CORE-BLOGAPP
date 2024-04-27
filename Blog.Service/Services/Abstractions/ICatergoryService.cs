@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Service.Services.Abstractions
 {
-    internal class ICatergoryService
+    public interface ICatergoryService
     {
     }
 }
