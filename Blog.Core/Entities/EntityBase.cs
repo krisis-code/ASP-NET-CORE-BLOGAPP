@@ -10,7 +10,7 @@ namespace Blog.Core.Entities
     {
         public virtual Guid Id { get; set; } = Guid.NewGuid();
 
-        public virtual string? CreatedBy { get; set; }
+        public virtual string? CreatedBy { get; set; } = "Undefined";
 
         public virtual string? ModifiedBy { get; set; }
 

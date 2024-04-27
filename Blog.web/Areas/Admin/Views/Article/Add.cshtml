@@ -14,13 +14,13 @@
                     <div asp-validation-summary="ModelOnly"></div>
                     <div class="card-body">
                         <div class="form-group">
-                            <label asp-for="CategoryId">Kategori</label>
+                            <label >Kategori</label>
 
                             <a class="btn text-primary float-end" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
                                 Ekle <i class="bx bx-plus"></i>
                             </a>
 
-                            <select id="categoryList" class="form-control" asp-for="CategoryId" @* asp-items="@(new SelectList(Model.Categories,"Id","Name") *@)"></select>
+                           @*  <select id="categoryList" class="form-control" asp-for="CategoryId" @* asp-items="@(new SelectList(Model.Categories,"Id","Name") *@)"></select> *@
                             <span asp-validation-for="CategoryId" class="text-danger"></span>
 
                         </div>

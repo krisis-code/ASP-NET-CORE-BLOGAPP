@@ -18,7 +18,7 @@ namespace Blog.web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public Task<IActionResult> Add()
+        public async Task<IActionResult> Add()
         {
             return View(); 
         }
