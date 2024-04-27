@@ -17,6 +17,7 @@ namespace Blog.web.Areas.Admin.Controllers
             return View(articles);
         }
 
+        [HttpGet]
         public Task<IActionResult> Add()
         {
             return View(); 
