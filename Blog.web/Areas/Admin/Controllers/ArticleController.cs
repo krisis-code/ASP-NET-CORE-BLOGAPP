@@ -32,6 +32,7 @@ namespace Blog.web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(ArticleAddDto articleAddDto)
         {
+            await articleService.CreateArticleAsync(articleAddDto);
             var categories = await categoryService.GetAllCategoriesNonDeleted();
             return View(new ArticleAddDto { Categories = categories });
         }

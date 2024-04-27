@@ -13,7 +13,7 @@ namespace Blog.Entity.DTOs.Articles
 
         public string Content { get; set; }
 
-        public string CategoryId { get; set; }
+        public Guid CategoryId { get; set; }
 
         public List<CategoryDto> Categories { get; set; }
     }
