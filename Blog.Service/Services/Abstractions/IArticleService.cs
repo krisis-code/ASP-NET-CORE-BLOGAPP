@@ -7,5 +7,6 @@ namespace Blog.Data.Repositories.Abstractions
 
         Task<List<ArticleDto>> GetAllArticlesWithCategoryNonDeletedAsync();
         Task CreateArticleAsync(ArticleAddDto articleAddDto);
+        Task GetArticlesWithCategoryNonDeletedAsync(ArticleUpdateDto articleUpdateDto);
     }
 }
