@@ -1,4 +1,5 @@
-﻿using Blog.Data.Repositories.Abstractions;
+﻿using AutoMapper;
+using Blog.Data.Repositories.Abstractions;
 using Blog.Entity.DTOs.Articles;
 using Blog.Service.Services.Abstractions;
 using Microsoft.AspNetCore.Mvc;
@@ -10,11 +11,13 @@ namespace Blog.web.Areas.Admin.Controllers
     {
         private readonly IArticleService articleService;
         private readonly ICategoryService categoryService;
+        private readonly IMapper mapper;
 
-        public ArticleController(IArticleService articleService , ICategoryService categoryService)
+        public ArticleController(IArticleService articleService , ICategoryService categoryService,IMapper mapper)
         {
             this.articleService = articleService;
             this.categoryService = categoryService;
+            this.mapper = mapper;
         }
         public async Task <IActionResult> Index()
         {
@@ -41,8 +44,11 @@ namespace Blog.web.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(Guid articleId)
         {
-            var articles = await articleService.GetAllArticlesWithCategoryNonDeletedAsync();
-            return View(new ArticleAddDto { Categories = categories });
+            var article = await articleService.GetArticlesWithCategoryNonDeletedAsync(articleId);
+            var categories = await categoryService.GetAllCategoriesNonDeleted();
+            var articleUpdateDto = mapper.Map<ArticleUpdateDto>(article);
+            articleUpdateDto.Categories = categories;
+            return View(articleUpdateDto);
         }
     }
 }
