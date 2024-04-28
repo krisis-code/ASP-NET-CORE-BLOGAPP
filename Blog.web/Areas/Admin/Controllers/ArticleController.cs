@@ -39,7 +39,7 @@ namespace Blog.web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Update(Guid ArticleId)
+        public async Task<IActionResult> Update(Guid articleId)
         {
             var categories = await categoryService.GetAllCategoriesNonDeleted();
             return View(new ArticleAddDto { Categories = categories });
