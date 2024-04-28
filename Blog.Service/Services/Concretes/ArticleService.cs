@@ -41,5 +41,12 @@ namespace Blog.Data.Repositories.Concretes
             var map = mapper.Map<List<ArticleDto>>(articles);
             return map;
         }
+
+        public async Task<ArticleDto> GetArticlesWithCategoryNonDeletedAsync(Guid articleId)
+        {
+            var article = await unitOfWork.GetRepository<Article>().GetAsync(x => !x.IsDeleted && x.Id==articleId, x => x.Category);
+            var map = mapper.Map<ArticleDto>(article);
+            return map;
+        }
     }
 }
