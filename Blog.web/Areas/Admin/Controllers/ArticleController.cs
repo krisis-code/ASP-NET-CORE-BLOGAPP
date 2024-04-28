@@ -37,5 +37,12 @@ namespace Blog.web.Areas.Admin.Controllers
             var categories = await categoryService.GetAllCategoriesNonDeleted();
             return View(new ArticleAddDto { Categories = categories });
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Update(Guid ArticleId)
+        {
+            var categories = await categoryService.GetAllCategoriesNonDeleted();
+            return View(new ArticleAddDto { Categories = categories });
+        }
     }
 }

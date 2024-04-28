@@ -21,6 +21,7 @@
                         <th>Oluşturulma Tarihi</th>
                         <th>Oluşturan</th>
                         <th>Durum</th>
+                        <th>İşlem</th>
                       
                     </tr>
                 </thead>
@@ -31,6 +32,7 @@
                         <th>Oluşturulma Tarihi</th>
                         <th>Oluşturan</th>
                         <th>Durum</th>
+                        <th>İşlem</th>
                      
                     </tr>
                 </tfoot>
@@ -43,7 +45,19 @@
                             <th>@article.CreatedDate.ToShortDateString()</th>
                             <th>@article.CreatedBy</th>  
                             <th>@(article.IsDeleted ? "Pasif" : "Aktif")</th>
+                       
+                
+                                    <th>
+
+                                        <a class="btn btn-primary btn-sm" data-id="@article.Id" asp-area="Admin" asp-controller="Article" asp-action="Update" asp-route-articleId="@article.Id"><i class="bx bxs-edit"></i></a>
+                                        <a class="btn btn-danger btn-sm" data-id="@article.Id" asp-area="Admin" asp-controller="Article" asp-action="Delete" asp-route-articleId="@article.Id"><i class="bx bx-minus-circle"></i></a>
+
+
+                                    </th>
+
                         </tr>
+                    
+                   
                     }
                 </tbody>
             </table>
