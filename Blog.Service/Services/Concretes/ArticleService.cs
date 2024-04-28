@@ -48,5 +48,14 @@ namespace Blog.Data.Repositories.Concretes
             var map = mapper.Map<ArticleDto>(article);
             return map;
         }
+
+        public async Task UpdateArticleAsync(ArticleUpdateDto articleUpdateDto)
+        {
+            var article = await unitOfWork.GetRepository<Article>().GetAsync(x => !x.IsDeleted && x.Id == articleUpdateDto.Id, x => x.Category);
+            mapper.Map<ArticleDto>(article);
+            await unitOfWork.GetRepository<Article>().UpdateAsync(article);
+            await unitOfWork.SaveAsync();
+            
+                }
     }
 }

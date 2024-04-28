@@ -50,5 +50,11 @@ namespace Blog.web.Areas.Admin.Controllers
             articleUpdateDto.Categories = categories;
             return View(articleUpdateDto);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(ArticleUpdateDto articleUpdateDto)
+        {
+           
+        }
     }
 }
