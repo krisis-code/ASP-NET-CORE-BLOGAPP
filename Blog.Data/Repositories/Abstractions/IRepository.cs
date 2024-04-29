@@ -16,7 +16,8 @@ namespace Blog.Data.Repositories.Abstractions
 
         Task<T> GetAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
 
-        Task<T> GuidAsync(Guid id);
+        Task<T> GetByGuidAsync(Guid id);
+   
 
         Task<T> UpdateAsync(T entity);
 
