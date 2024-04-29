@@ -58,6 +58,12 @@ namespace Blog.Data.Repositories.Concretes
             await unitOfWork.GetRepository<Article>().UpdateAsync(article);
             await unitOfWork.SaveAsync();
             
-                }
+        }
+
+        public async Task SafeDeleteArticleAsync(Guid articleId)
+        {
+
+
+        }
     }
 }
