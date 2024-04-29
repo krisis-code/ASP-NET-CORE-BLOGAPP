@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Blog.Data.Repositories.Abstractions;
 using Blog.Entity.DTOs.Articles;
+using Blog.Entity.Entities;
 using Blog.Service.Services.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -54,7 +55,18 @@ namespace Blog.web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(ArticleUpdateDto articleUpdateDto)
         {
+            await articleService.UpdateArticleAsync(articleUpdateDto);
+
+            var categories = await categoryService.GetAllCategoriesNonDeleted();
+        
+            articleUpdateDto.Categories = categories;
+            return View(articleUpdateDto);
+        }
+
+        public async Task<IActionResult> Delete(Guid Id)
+        {
            
+            return View();
         }
     }
 }
