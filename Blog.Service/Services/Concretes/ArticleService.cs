@@ -21,14 +21,10 @@ namespace Blog.Data.Repositories.Concretes
         public async Task CreateArticleAsync(ArticleAddDto articleAddDto)
         {
             var userId = Guid.Parse("CB94223B-CCB8-4F2F-93D7-0DF96A7F065C");
+            var imageId = Guid.Parse("B93E0A19-EA35-4121-985A-5D2E33720DE4");
 
-            var article = new Article
-            {
-                Title = articleAddDto.Title,
-                Content = articleAddDto.Content,
-                CategoryId = articleAddDto.CategoryId,
-                UserId = userId
-            };
+            var article = new Article(articleAddDto.Title, articleAddDto.Content, userId,articleAddDto.CategoryId ,imageId);
+          
             await unitOfWork.GetRepository<Article>().addAsync(article);
             await unitOfWork.SaveAsync();
 
