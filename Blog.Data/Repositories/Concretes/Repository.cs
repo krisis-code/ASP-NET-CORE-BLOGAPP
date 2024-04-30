@@ -62,7 +62,7 @@ namespace Blog.Data.Repositories.Concretes
             return await query.SingleOrDefaultAsync();
         }
 
-        public async Task<T> GuidAsync(Guid id)
+        public async Task<T> GetByGuidAsync(Guid id)
         {
             return await Table.FindAsync(id);
         }
@@ -73,5 +73,7 @@ namespace Blog.Data.Repositories.Concretes
             return entity;
 
         }
+
+      
     }
 }
