@@ -3,7 +3,9 @@ using Blog.Data.Repositories.Concretes;
 using Blog.Service.Services.Abstractions;
 using Blog.Service.Services.Concretes;
 using Microsoft.Extensions.DependencyInjection;
+using FluentValidation;
 using System.Reflection;
+using Blog.Service.FluentValidations;
 
 namespace Blog.Data.Extensions
 {
@@ -17,6 +19,7 @@ namespace Blog.Data.Extensions
 
             services.AddAutoMapper(assembly);
 
+            services.AddValidatorsFromAssemblyContaining<ArticleValidator>();
             return services;
         }
     }
