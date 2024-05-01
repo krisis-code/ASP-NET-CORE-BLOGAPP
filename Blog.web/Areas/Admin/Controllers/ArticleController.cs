@@ -74,12 +74,27 @@ namespace Blog.web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(ArticleUpdateDto articleUpdateDto)
         {
-            await articleService.UpdateArticleAsync(articleUpdateDto);
+            var map = mapper.Map<Article>(articleUpdateDto);
+            var result = await validator.ValidateAsync(map);
+
+            if (result.IsValid)
+            {
+                await articleService.UpdateArticleAsync(articleUpdateDto);
+
+              
+            }
+            else
+            {
+                result.AddToModelState(this.ModelState);
+
+                
+            }
 
             var categories = await categoryService.GetAllCategoriesNonDeleted();
-        
+
             articleUpdateDto.Categories = categories;
             return View(articleUpdateDto);
+
         }
 
         public async Task<IActionResult> Delete(Guid articleId)
