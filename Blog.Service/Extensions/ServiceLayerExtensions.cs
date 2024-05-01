@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using FluentValidation;
 using System.Reflection;
 using Blog.Service.FluentValidations;
+using FluentValidation.AspNetCore;
 
 namespace Blog.Data.Extensions
 {
@@ -19,7 +20,14 @@ namespace Blog.Data.Extensions
 
             services.AddAutoMapper(assembly);
 
-            services.AddValidatorsFromAssemblyContaining<ArticleValidator>();
+            services.AddControllersWithViews().AddFluentValidation(opt =>
+            {
+                opt.RegisterValidatorsFromAssemblyContaining<ArticleValidator>();
+                opt.DisableDataAnnotationsValidation = true;
+                opt.ValidatorOptions.LanguageManager.Culture = new System.Globalization.CultureInfo("tr");
+
+
+            });
             return services;
         }
     }
