@@ -6,6 +6,7 @@ using Blog.Service.Extensions;
 using Blog.Service.Services.Abstractions;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using NToastNotify;
 
 namespace Blog.web.Areas.Admin.Controllers
 {
@@ -16,13 +17,15 @@ namespace Blog.web.Areas.Admin.Controllers
         private readonly ICategoryService categoryService;
         private readonly IMapper mapper;
         private readonly IValidator<Article> validator;
+        private readonly IToastNotification toastNotification;
 
-        public ArticleController(IArticleService articleService , ICategoryService categoryService,IMapper mapper,IValidator<Article> validator)
+        public ArticleController(IArticleService articleService , ICategoryService categoryService,IMapper mapper,IValidator<Article> validator , IToastNotification toastNotification)
         {
             this.articleService = articleService;
             this.categoryService = categoryService;
             this.mapper = mapper;
             this.validator = validator;
+            this.toastNotification = toastNotification;
         }
         public async Task <IActionResult> Index()
         {
