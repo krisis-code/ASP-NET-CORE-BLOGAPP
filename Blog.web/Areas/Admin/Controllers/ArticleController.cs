@@ -39,6 +39,7 @@ namespace Blog.web.Areas.Admin.Controllers
            
 
             var categories = await categoryService.GetAllCategoriesNonDeleted();
+           
             return View(new ArticleAddDto { Categories = categories} ); 
         }
 
@@ -51,6 +52,7 @@ namespace Blog.web.Areas.Admin.Controllers
             if (result.IsValid)
             {
                 await articleService.CreateArticleAsync(articleAddDto);
+                toastNotification.AddSuccessToastMessage("Yeni makale başarı ile eklendi");
                 return RedirectToAction("Index", "Article", new { area = "Admin" });
             }
             else
@@ -83,8 +85,9 @@ namespace Blog.web.Areas.Admin.Controllers
             if (result.IsValid)
             {
                 await articleService.UpdateArticleAsync(articleUpdateDto);
+                toastNotification.AddInfoToastMessage(articleUpdateDto.Title+"Makale başarıyla güncellendi");
 
-              
+
             }
             else
             {
