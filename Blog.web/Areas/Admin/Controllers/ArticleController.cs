@@ -52,7 +52,7 @@ namespace Blog.web.Areas.Admin.Controllers
             if (result.IsValid)
             {
                 await articleService.CreateArticleAsync(articleAddDto);
-                toastNotification.AddSuccessToastMessage("Yeni makale başarı ile eklendi");
+                toastNotification.AddSuccessToastMessage(articleAddDto.Title+" "+"İsimli makale başarıyla eklendi", new ToastrOptions { Title = "Başarılı" !});
                 return RedirectToAction("Index", "Article", new { area = "Admin" });
             }
             else
@@ -85,7 +85,7 @@ namespace Blog.web.Areas.Admin.Controllers
             if (result.IsValid)
             {
                 await articleService.UpdateArticleAsync(articleUpdateDto);
-                toastNotification.AddInfoToastMessage(articleUpdateDto.Title+"Makale başarıyla güncellendi");
+                toastNotification.AddInfoToastMessage(articleUpdateDto.Title + " " + "İsimli Makale başarıyla güncellendi", new ToastrOptions { Title="Başarılı"});
 
 
             }
