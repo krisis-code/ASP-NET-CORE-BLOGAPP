@@ -10,7 +10,7 @@ namespace Blog.Data.Repositories.Abstractions
         Task <string>UpdateArticleAsync(ArticleUpdateDto articleUpdateDto);
         Task CreateArticleAsync(ArticleAddDto articleAddDto);
 
-        Task SafeDeleteArticleAsync(Guid articleId);
+        Task <string>SafeDeleteArticleAsync(Guid articleId);
 
 
     }
