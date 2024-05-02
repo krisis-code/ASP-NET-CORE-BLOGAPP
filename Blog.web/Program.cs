@@ -2,13 +2,20 @@ using Blog.Data.Context;
 using Blog.Data.Extensions;
 using Blog.Entity.Entities;
 using Microsoft.AspNetCore.Identity;
+using NToastNotify;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.LoadDataLayerExtension(builder.Configuration );
 builder.Services.LoadServiceLayerExtension();
 // Add services to the container.
-builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.AddControllersWithViews()
+    .AddNToastNotifyToastr(new ToastrOptions()
+    {
+        PositionClass = ToastPositions.TopRight,
+        TimeOut=3000
+    })
+    .AddRazorRuntimeCompilation();
 builder.Services.AddSession();
 builder.Services.AddIdentity<AppUser, AppRole>(opt =>
 {
