@@ -4,6 +4,7 @@ using Blog.Entity.DTOs.Articles;
 using Blog.Entity.Entities;
 using Blog.Service.Extensions;
 using Blog.Service.Services.Abstractions;
+using Blog.web.Areas.ResultMessages;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
@@ -52,7 +53,7 @@ namespace Blog.web.Areas.Admin.Controllers
             if (result.IsValid)
             {
                 await articleService.CreateArticleAsync(articleAddDto);
-                toastNotification.AddSuccessToastMessage(articleAddDto.Title+" "+"İsimli makale başarıyla eklendi", new ToastrOptions { Title = "Başarılı" !});
+                toastNotification.AddSuccessToastMessage(Messages.Article.Add(articleAddDto.Title), new ToastrOptions { Title = "Başarılı" !});
                 return RedirectToAction("Index", "Article", new { area = "Admin" });
             }
             else
@@ -84,8 +85,8 @@ namespace Blog.web.Areas.Admin.Controllers
 
             if (result.IsValid)
             {
-                await articleService.UpdateArticleAsync(articleUpdateDto);
-                toastNotification.AddInfoToastMessage(articleUpdateDto.Title + " " + "İsimli Makale başarıyla güncellendi", new ToastrOptions { Title="Başarılı"});
+             var title = await articleService.UpdateArticleAsync(articleUpdateDto);
+                toastNotification.AddInfoToastMessage(Messages.Article.Update(title), new ToastrOptions { Title="Başarılı"});
 
 
             }

@@ -45,7 +45,7 @@ namespace Blog.Data.Repositories.Concretes
             return map;
         }
 
-        public async Task UpdateArticleAsync(ArticleUpdateDto articleUpdateDto)
+        public async Task<string> UpdateArticleAsync(ArticleUpdateDto articleUpdateDto)
         {
             var article = await unitOfWork.GetRepository<Article>().GetAsync(x => !x.IsDeleted && x.Id == articleUpdateDto.Id, x => x.Category);
            article.Title = articleUpdateDto.Title;
@@ -53,6 +53,8 @@ namespace Blog.Data.Repositories.Concretes
             article.CategoryId = articleUpdateDto.CategoryId;
             await unitOfWork.GetRepository<Article>().UpdateAsync(article);
             await unitOfWork.SaveAsync();
+
+            return article.Title;
             
         }
 
