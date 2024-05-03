@@ -57,10 +57,13 @@ namespace Blog.Data.Repositories.Concretes
 
         public async Task<string> UpdateArticleAsync(ArticleUpdateDto articleUpdateDto)
         {
+            var userEmail = claims.GetLoggedInUserEmail();
             var article = await unitOfWork.GetRepository<Article>().GetAsync(x => !x.IsDeleted && x.Id == articleUpdateDto.Id, x => x.Category);
-           article.Title = articleUpdateDto.Title;
+            article.Title = articleUpdateDto.Title;
             article.Content = articleUpdateDto.Content;
             article.CategoryId = articleUpdateDto.CategoryId;
+            article.ModifiedDate= DateTime.Now;
+            article.ModifiedBy =userEmail;
             await unitOfWork.GetRepository<Article>().UpdateAsync(article);
             await unitOfWork.SaveAsync();
 
@@ -70,9 +73,11 @@ namespace Blog.Data.Repositories.Concretes
 
         public async Task<string> SafeDeleteArticleAsync(Guid articleId)
         {
+            var userEmail = claims.GetLoggedInUserEmail();
             var article = await unitOfWork.GetRepository<Article>().GetByGuidAsync(articleId);
             article.IsDeleted = true;
             article.DeletedDate = DateTime.Now;
+            article.DeletedBy = userEmail;
 
             await unitOfWork.GetRepository<Article>().UpdateAsync(article);
             await unitOfWork.SaveAsync();
