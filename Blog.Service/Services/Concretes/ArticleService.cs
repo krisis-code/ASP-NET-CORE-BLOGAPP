@@ -3,6 +3,9 @@ using Blog.Entity.Entities;
 using Blog.Data.UnitOfWorks;
 using Blog.Entity.DTOs.Articles;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
+using Blog.Service.Extensions;
 
 namespace Blog.Data.Repositories.Concretes
 {
@@ -11,16 +14,21 @@ namespace Blog.Data.Repositories.Concretes
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
+        private readonly IHttpContextAccessor accessor;
+        private readonly ClaimsPrincipal claims;
 
-        public ArticleService(IUnitOfWork unitOfWork , IMapper mapper)
+        public ArticleService(IUnitOfWork unitOfWork , IMapper mapper , IHttpContextAccessor accessor)
         {
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
+            this.accessor = accessor;
+            claims = accessor.HttpContext.User;
         }
 
         public async Task CreateArticleAsync(ArticleAddDto articleAddDto)
         {
-            var userId = Guid.Parse("CB94223B-CCB8-4F2F-93D7-0DF96A7F065C");
+            //var userId = Guid.Parse("CB94223B-CCB8-4F2F-93D7-0DF96A7F065C");
+            var userId = claims.GetLoggedInUserId ();
             var imageId = Guid.Parse("B93E0A19-EA35-4121-985A-5D2E33720DE4");
 
             var article = new Article(articleAddDto.Title, articleAddDto.Content, userId,articleAddDto.CategoryId ,imageId);
