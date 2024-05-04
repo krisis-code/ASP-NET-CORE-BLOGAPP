@@ -1,4 +1,5 @@
 ﻿using Blog.Core.Entities;
+using Blog.Entity.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace Blog.Entity.Entities
         public string FileName { get; set; }
     
         public string FileType { get; set; }
-    
+
         public ICollection<Article> Articles { get; set; }
         
         public ICollection<AppUser> Users { get; set; }

@@ -1,4 +1,5 @@
 ﻿using Blog.Entity.DTOs.Images;
+using Blog.Entity.Enums;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -15,7 +16,7 @@ namespace Blog.Service.Helpers.Image
         private readonly string wwwroot;
         private const string imageFolder = "images";
         private const string articleImagesFolder = "article-images";
-        private const string articleUserFolder = "user-images";
+        private const string userImagesFolder = "user-images";
 
         public ImageHelper(IWebHostEnvironment env) 
         {
@@ -76,14 +77,44 @@ namespace Blog.Service.Helpers.Image
                  .Replace(" ", "");
         }
 
-        public Task Delete(string imageName)
+        public async Task<ImageUploadedDto> Upload(string name, IFormFile imageFile, ImageType imageType, string folderName = null)
         {
-            throw new NotImplementedException();
+            folderName ??= imageType == ImageType.User ? userImagesFolder : articleImagesFolder;
+
+            if (!Directory.Exists($"{wwwroot}/{imageFolder}/{folderName}"))
+                Directory.CreateDirectory($"{wwwroot}/{imageFolder}/{folderName}");
+
+            string oldFileName = Path.GetFileNameWithoutExtension(imageFile.FileName);
+            string fileExtension = Path.GetExtension(imageFile.FileName);
+
+            name = ReplaceInvalidChars(name);
+
+            DateTime dateTime = DateTime.Now;
+
+            string newFileName = $"{name}_{dateTime.Millisecond}{fileExtension}";
+
+            var path = Path.Combine($"{wwwroot}/{imageFolder}/{folderName}", newFileName);
+
+            await using var stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None, 1024 * 1024, useAsync: false);
+            await imageFile.CopyToAsync(stream);
+            await stream.FlushAsync();
+
+            string message = imageType == ImageType.User
+                ? $"{newFileName} isimli kullanıcı resmi başarı ile eklenmiştir."
+                : $"{newFileName} isimli makale resmi başarı ile eklenmiştir";
+
+            return new ImageUploadedDto()
+            {
+                FullName = $"{folderName}/{newFileName}"
+            };
         }
 
-        public Task<ImageUploadedDto> Upload(string name, IFormFile imageFile, string folderName = null)
+        public void Delete(string imageName)
         {
-            throw new NotImplementedException();
+            var fileToDelete = Path.Combine($"{wwwroot}/{imageFolder}/{imageName}");
+            if (File.Exists(fileToDelete))
+                File.Delete(fileToDelete);
+
         }
     }
 }
