@@ -11,7 +11,7 @@ namespace Blog.Service.Helpers.Image
     public interface IImageHelper
 
     {
-        Task<ImageUploadedDto> Upload(string name, IFormFile imageFile, string folderName = null);
+        Task<ImageUploadedDto> Upload(string name, IFormFile imageFile,ImageType imageType, string folderName = null);
         Task Delete(string imageName);
     }
 }
