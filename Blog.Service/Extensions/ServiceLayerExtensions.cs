@@ -8,6 +8,7 @@ using System.Reflection;
 using Blog.Service.FluentValidations;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Http;
+using Blog.Service.Helpers.Image;
 
 namespace Blog.Data.Extensions
 {
@@ -19,6 +20,7 @@ namespace Blog.Data.Extensions
             services.AddScoped<IArticleService,ArticleService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddSingleton<IHttpContextAccessor ,HttpContextAccessor>();
+            services.AddScoped<IImageHelper, ImageHelper>();
             services.AddAutoMapper(assembly);
 
             services.AddControllersWithViews().AddFluentValidation(opt =>
