@@ -116,5 +116,15 @@ namespace Blog.Service.Helpers.Image
                 File.Delete(fileToDelete);
 
         }
+
+        Task IImageHelper.Delete(string imageName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Upload(string title, IFormFile photo, ImageType post)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

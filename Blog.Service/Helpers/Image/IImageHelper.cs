@@ -1,4 +1,5 @@
 ﻿using Blog.Entity.DTOs.Images;
+using Blog.Entity.Enums;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -13,5 +14,6 @@ namespace Blog.Service.Helpers.Image
     {
         Task<ImageUploadedDto> Upload(string name, IFormFile imageFile,ImageType imageType, string folderName = null);
         Task Delete(string imageName);
+       
     }
 }
