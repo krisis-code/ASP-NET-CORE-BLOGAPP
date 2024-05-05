@@ -1,4 +1,5 @@
 ﻿using Blog.Entity.DTOs.Categories;
+using Blog.Entity.Entities;
 
 namespace Blog.Entity.DTOs.Articles
 {
@@ -13,6 +14,8 @@ namespace Blog.Entity.DTOs.Articles
         public CategoryDto Category { get; set; }
 
         public DateTime CreatedDate { get; set; }   
+
+        public Image Image { get; set; }
     
         public string CreatedBy { get; set; }
 

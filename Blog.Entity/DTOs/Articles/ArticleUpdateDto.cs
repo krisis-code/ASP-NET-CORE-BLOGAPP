@@ -1,4 +1,5 @@
 ﻿using Blog.Entity.DTOs.Categories;
+using Blog.Entity.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace Blog.Entity.DTOs.Articles
         public string Content { get; set; }
 
         public Guid CategoryId { get; set; }
+
+        public Image Image { get; set; }
 
         public IList<CategoryDto> Categories { get; set; }
     }
