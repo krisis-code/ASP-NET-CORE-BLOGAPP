@@ -1,5 +1,6 @@
 ﻿using Blog.Entity.DTOs.Categories;
 using Blog.Entity.Entities;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,8 @@ namespace Blog.Entity.DTOs.Articles
         public Guid CategoryId { get; set; }
 
         public Image Image { get; set; }
+
+        public IFormFile? Photo { get; set; }
 
         public IList<CategoryDto> Categories { get; set; }
     }
