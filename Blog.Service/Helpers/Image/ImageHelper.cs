@@ -117,14 +117,7 @@ namespace Blog.Service.Helpers.Image
 
         }
 
-        Task IImageHelper.Delete(string imageName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Upload(string title, IFormFile photo, ImageType post)
-        {
-            throw new NotImplementedException();
-        }
+     
+       
     }
 }

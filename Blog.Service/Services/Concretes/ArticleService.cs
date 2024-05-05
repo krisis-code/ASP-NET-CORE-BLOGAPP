@@ -65,13 +65,15 @@ namespace Blog.Data.Repositories.Concretes
         public async Task<string> UpdateArticleAsync(ArticleUpdateDto articleUpdateDto)
         {
             var userEmail = claims.GetLoggedInUserEmail();
-            var article = await unitOfWork.GetRepository<Article>().GetAsync(x => !x.IsDeleted && x.Id == articleUpdateDto.Id, x => x.Category);
+            var article = await unitOfWork.GetRepository<Article>().GetAsync(x => !x.IsDeleted && x.Id == articleUpdateDto.Id, x => x.Category, i => i.Image);
             if (articleUpdateDto.Photo != null)
             {
                 imageHelper.Delete(article.Image.FileName);
+
                 var imageUpload = await imageHelper.Upload(articleUpdateDto.Title, articleUpdateDto.Photo, ImageType.Post);
                 Image image = new(imageUpload.FullName, articleUpdateDto.Photo.ContentType, userEmail);
-                await unitOfWork.GetRepository<Image>().UpdateAsync(image);
+                await unitOfWork.GetRepository<Image>().addAsync(image);
+
                 article.ImageId = image.Id;
             }
             article.Title = articleUpdateDto.Title;
