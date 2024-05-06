@@ -4,7 +4,7 @@ namespace Blog.web.Areas.Admin.Controllers
 {
     public class CategoryController : Controller
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             return View();
         }
