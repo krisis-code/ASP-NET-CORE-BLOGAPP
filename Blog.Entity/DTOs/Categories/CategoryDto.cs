@@ -10,5 +10,11 @@ namespace Blog.Entity.DTOs.Categories
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+
+        public string CreatedBy { get; set; }
+
+        public DateTime CreatedTime { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }
