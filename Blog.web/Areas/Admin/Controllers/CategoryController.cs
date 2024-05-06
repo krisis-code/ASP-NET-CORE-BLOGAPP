@@ -17,5 +17,16 @@ namespace Blog.web.Areas.Admin.Controllers
             var categories = await categoryService.GetAllCategoriesNonDeleted();
             return View(categories);
         }
+
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add()
+        {
+            return View();
+        }
     }
 }
