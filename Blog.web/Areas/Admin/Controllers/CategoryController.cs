@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using Blog.Entity.DTOs.Articles;
 using Blog.Entity.DTOs.Categories;
 using Blog.Entity.Entities;
 using Blog.Service.Extensions;
 using Blog.Service.Services.Abstractions;
+using Blog.web.Areas.ResultMessages;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
@@ -42,6 +44,7 @@ namespace Blog.web.Areas.Admin.Controllers
             if (result.IsValid)
             {
                 await categoryService.CreateCategoryAsync(categoryAddDto);
+                toastNotification.AddSuccessToastMessage(Messages.Article.Add(categoryAddDto.Name), new ToastrOptions { Title = "Başarılı"! });
                 return RedirectToAction("Index","Category",new {Area = "Admin" });
             }
             result.AddToModelState(this.ModelState);
