@@ -44,7 +44,7 @@ namespace Blog.web.Areas.Admin.Controllers
             if (result.IsValid)
             {
                 await categoryService.CreateCategoryAsync(categoryAddDto);
-                toastNotification.AddSuccessToastMessage(Messages.Article.Add(categoryAddDto.Name), new ToastrOptions { Title = "Başarılı"! });
+                toastNotification.AddSuccessToastMessage(Messages.Category.Add(categoryAddDto.Name), new ToastrOptions { Title = "Başarılı"! });
                 return RedirectToAction("Index","Category",new {Area = "Admin" });
             }
             result.AddToModelState(this.ModelState);

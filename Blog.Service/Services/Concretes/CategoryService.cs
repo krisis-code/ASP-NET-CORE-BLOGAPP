@@ -5,12 +5,7 @@ using Blog.Entity.Entities;
 using Blog.Service.Extensions;
 using Blog.Service.Services.Abstractions;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Blog.Service.Services.Concretes
 {
@@ -26,6 +21,7 @@ namespace Blog.Service.Services.Concretes
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
             this.httpContextAccessor = httpContextAccessor;
+            _user = httpContextAccessor.HttpContext.User;
         }
 
         public async Task<List<CategoryDto>> GetAllCategoriesNonDeleted()
