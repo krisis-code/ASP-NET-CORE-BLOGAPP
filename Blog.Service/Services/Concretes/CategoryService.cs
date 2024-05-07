@@ -36,15 +36,15 @@ namespace Blog.Service.Services.Concretes
             return map;
 
         }
-        public async Task<string> CreateCategoryAsync(CategoryAddDto categoryAddDto)
+        public async Task CreateCategoryAsync(CategoryAddDto categoryAddDto)
         {
-            var userId = _user.GetLoggedInUserId();
+          
             var userEmail = _user.GetLoggedInUserEmail();
             Category category = new(categoryAddDto.Name,userEmail);
             await unitOfWork.GetRepository<Category>().addAsync(category);
             await unitOfWork.SaveAsync();
 
-            return category.Name;
+           
         }
     }
 
