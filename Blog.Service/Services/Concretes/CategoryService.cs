@@ -30,8 +30,7 @@ namespace Blog.Service.Services.Concretes
 
         public async Task<List<CategoryDto>> GetAllCategoriesNonDeleted()
         {
-            var userId = _user.GetLoggedInUserId();
-            var userEmail = _user.GetLoggedInUserEmail();
+         
             var categories = await unitOfWork.GetRepository<Category>().GetAllAsync(x => !x.IsDeleted);
             var map = mapper.Map<List<CategoryDto>>(categories);
             return map;
@@ -39,8 +38,13 @@ namespace Blog.Service.Services.Concretes
         }
         public async Task<string> CreateCategoryAsync(CategoryAddDto categoryAddDto)
         {
-            Category category = new(categoryAddDto.Name);
-            await unitOfWork.GetRepository<Category>().addAsync(category);  
+            var userId = _user.GetLoggedInUserId();
+            var userEmail = _user.GetLoggedInUserEmail();
+            Category category = new(categoryAddDto.Name,userEmail);
+            await unitOfWork.GetRepository<Category>().addAsync(category);
+            await unitOfWork.SaveAsync();
+
+            return category.Name;
         }
     }
 
