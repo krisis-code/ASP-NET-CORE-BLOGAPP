@@ -23,10 +23,5 @@ namespace Blog.web.Areas.Admin.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Add()
-        {
-            return View();
-        }
     }
 }
