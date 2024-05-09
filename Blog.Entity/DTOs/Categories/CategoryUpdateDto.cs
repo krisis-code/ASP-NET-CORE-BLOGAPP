@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Blog.Entity.DTOs.Categories
 {
-    internal class CategoryUpdateDto
+    public class CategoryUpdateDto
     {
+        public Guid Id { get; set; }
+
+        public string Name { get; set; }
     }
 }
