@@ -80,11 +80,11 @@ namespace Blog.web.Areas.Admin.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Delete(Guid articleId)
+        public async Task<IActionResult> Delete(Guid categoryId)
         {
-            var title = await articleService.SafeDeleteArticleAsync(articleId);
+            var title = await categoryService.SafeDeleteCategoryAsync(categoryId);
             toastNotification.AddInfoToastMessage(Messages.Article.Delete(title), new ToastrOptions { Title = "Başarılı" });
-            return RedirectToAction("Index", "Article", new { area = "Admin" });
+            return RedirectToAction("Index", "Category", new { area = "Admin" });
         }
     }
 }
