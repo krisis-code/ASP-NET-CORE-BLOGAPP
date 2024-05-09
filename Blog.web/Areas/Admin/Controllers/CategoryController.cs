@@ -53,9 +53,10 @@ namespace Blog.web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public Task<IActionResult> Update(Guid categoryId)
+        public async Task<IActionResult> Update(Guid categoryId)
         {
-            
+            var category = await categoryService.GetCategoryByGuid(categoryId);
+            return View(new CategoryUpdateDto() { Id = category.Id, Name = category.Name });
         }
     }
 }
