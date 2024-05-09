@@ -51,5 +51,11 @@ namespace Blog.web.Areas.Admin.Controllers
             return View();
 
         }
+
+        [HttpGet]
+        public Task<IActionResult> Update(Guid categoryId)
+        {
+            
+        }
     }
 }
