@@ -68,6 +68,20 @@ namespace Blog.Service.Services.Concretes
 
 
         }
+
+        public async Task<string> SafeDeleteCategoryAsync(Guid CategoryId)
+        {
+            var userEmail =_user.GetLoggedInUserEmail();
+            var category = await unitOfWork.GetRepository<Category>().GetByGuidAsync(CategoryId);
+            category.IsDeleted = true;
+            category.DeletedDate = DateTime.Now;
+            category.DeletedBy = userEmail;
+
+            await unitOfWork.GetRepository<Category>().UpdateAsync(category);
+            await unitOfWork.SaveAsync();
+
+            return category.Name;
+        }
     }
 
        

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Blog.Data.Repositories.Abstractions;
 using Blog.Data.Repositories.Concretes;
 using Blog.Entity.DTOs.Articles;
 using Blog.Entity.DTOs.Categories;
@@ -77,6 +78,13 @@ namespace Blog.web.Areas.Admin.Controllers
             }
             result.AddToModelState(this.ModelState);
             return View();
+        }
+
+        public async Task<IActionResult> Delete(Guid articleId)
+        {
+            var title = await articleService.SafeDeleteArticleAsync(articleId);
+            toastNotification.AddInfoToastMessage(Messages.Article.Delete(title), new ToastrOptions { Title = "Başarılı" });
+            return RedirectToAction("Index", "Article", new { area = "Admin" });
         }
     }
 }
