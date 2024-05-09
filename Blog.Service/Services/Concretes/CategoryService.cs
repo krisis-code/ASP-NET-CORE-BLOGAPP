@@ -42,6 +42,12 @@ namespace Blog.Service.Services.Concretes
 
            
         }
+        public async Task<Category> GetCategoryByGuid(Guid id)
+        {
+            var category = await unitOfWork.GetRepository<Category>().GetAllAsync(x => !x.IsDeleted);
+
+            return category;
+        }
     }
 
        
