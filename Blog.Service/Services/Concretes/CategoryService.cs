@@ -44,9 +44,20 @@ namespace Blog.Service.Services.Concretes
         }
         public async Task<Category> GetCategoryByGuid(Guid id)
         {
-            var category = await unitOfWork.GetRepository<Category>().GetAllAsync(x => !x.IsDeleted);
+            var category = await unitOfWork.GetRepository<Category>().GetByGuidAsync(id);
 
             return category;
+        }
+
+        public async Task UpdateCategoryAsync(CategoryUpdateDto categoryUpdateDto)
+        {
+
+            var userEmail = _user.GetLoggedInUserEmail();
+            Category category = new(categoryAddDto.Name, userEmail);
+            await unitOfWork.GetRepository<Category>().addAsync(category);
+            await unitOfWork.SaveAsync();
+
+
         }
     }
 

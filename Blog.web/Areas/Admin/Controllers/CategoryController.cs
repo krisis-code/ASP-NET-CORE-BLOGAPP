@@ -56,7 +56,15 @@ namespace Blog.web.Areas.Admin.Controllers
         public async Task<IActionResult> Update(Guid categoryId)
         {
             var category = await categoryService.GetCategoryByGuid(categoryId);
-            return View(new CategoryUpdateDto() { Id = category.Id, Name = category.Name });
+            var map = mapper.Map<Category,CategoryUpdateDto>(category);
+            return View(map);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(CategoryUpdateDto categoryUpdateDto)
+        {
+            var category = await categoryService.GetCategoryByGuid(categoryId);
+            var map = mapper.Map<Category, CategoryUpdateDto>(category);
+            return View(map);
         }
     }
 }
