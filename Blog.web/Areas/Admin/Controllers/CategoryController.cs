@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Blog.Data.Repositories.Concretes;
 using Blog.Entity.DTOs.Articles;
 using Blog.Entity.DTOs.Categories;
 using Blog.Entity.Entities;
@@ -8,6 +9,8 @@ using Blog.web.Areas.ResultMessages;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
+using static Blog.web.Areas.ResultMessages.Messages;
+using Category = Blog.Entity.Entities.Category;
 
 namespace Blog.web.Areas.Admin.Controllers
 {
@@ -62,9 +65,18 @@ namespace Blog.web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(CategoryUpdateDto categoryUpdateDto)
         {
-            var category = await categoryService.GetCategoryByGuid(categoryId);
-            var map = mapper.Map<Category, CategoryUpdateDto>(category);
-            return View(map);
+            
+            var map = mapper.Map<Category>(categoryUpdateDto);
+            var result = await validator.ValidateAsync(map);
+            if (result.IsValid)
+            {
+                var title = await categoryService.UpdateCategoryAsync(categoryUpdateDto);
+                toastNotification.AddInfoToastMessage(Messages.Article.Update(title), new ToastrOptions { Title = "Başarılı" });
+                return RedirectToAction("Index", "Category", new { area = "Admin" });
+
+            }
+            result.AddToModelState(this.ModelState);
+            return View();
         }
     }
 }

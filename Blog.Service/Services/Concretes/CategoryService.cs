@@ -49,13 +49,22 @@ namespace Blog.Service.Services.Concretes
             return category;
         }
 
-        public async Task UpdateCategoryAsync(CategoryUpdateDto categoryUpdateDto)
+        public async Task<string> UpdateCategoryAsync(CategoryUpdateDto categoryUpdateDto)
         {
 
             var userEmail = _user.GetLoggedInUserEmail();
-            Category category = new(categoryAddDto.Name, userEmail);
-            await unitOfWork.GetRepository<Category>().addAsync(category);
+            var category = await unitOfWork.GetRepository<Category>().GetAsync(x => !x.IsDeleted && x.Id == categoryUpdateDto.Id);
+
+            category.Name = categoryUpdateDto.Name;
+            category.ModifiedBy = userEmail;
+            category.ModifiedDate = DateTime.Now;
+
+
+            await unitOfWork.GetRepository<Category>().UpdateAsync(category);
             await unitOfWork.SaveAsync();
+
+
+            return category.Name;
 
 
         }
