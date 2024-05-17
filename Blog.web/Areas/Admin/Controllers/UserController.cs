@@ -2,9 +2,10 @@
 
 namespace Blog.web.Areas.Admin.Controllers
 {
+	[Area("Admin")]
 	public class UserController : Controller
 	{
-		public IActionResult Index()
+		public async Task  <IActionResult> Index()
 		{
 			return View();
 		}
