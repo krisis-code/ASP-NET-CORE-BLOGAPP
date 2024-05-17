@@ -1,4 +1,6 @@
-﻿using Blog.Entity.Entities;
+﻿using AutoMapper;
+using Blog.Entity.DTOs.Users;
+using Blog.Entity.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,15 +11,27 @@ namespace Blog.web.Areas.Admin.Controllers
 	public class UserController : Controller
 	{
 		private readonly UserManager<AppUser> userManager;
+		private readonly IMapper mapper;
 
-		public UserController(UserManager<AppUser> userManager)
+		public UserController(UserManager<AppUser> userManager,IMapper mapper)
         {
 			this.userManager = userManager;
+			this.mapper = mapper;
 		}
         public async Task  <IActionResult> Index()
 		{
 			var users = await userManager.Users.ToListAsync();
-			return View();
+			var map = mapper.Map<List<UserDto>>(users);
+
+			foreach (var item in map)
+			{
+				var findUser = await userManager.FindByIdAsync(item.Id.ToString());
+				var role = string.Join("", await userManager.GetRolesAsync(findUser));
+				item.Role = role;
+
+			}
+
+			return View(map);
 		}
 	}
 }
