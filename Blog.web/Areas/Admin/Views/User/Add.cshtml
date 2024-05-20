@@ -35,11 +35,11 @@
                             <label asp-for="RoleId" id="defaultFormControlInput" class="form-label">Kullanıcının Rolü</label>
                             <select asp-for="RoleId" class="form-control mb-3" asp-items="@(new SelectList(Model.Roles,"Id","Name"))"></select>
                         </div>
-                      @*   <div class="form-group">
+                        <div class="form-group">
                             <label asp-for="Password" id="defaultFormControlInput" class="form-label">Kullanıcının Parolası</label>
                             <input asp-for="Password" type="password" class="form-control mb-3" id="defaultFormControlInput" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="defaultFormControlHelp">
                         </div>
-                         *@
+                        
 
 
                         <div class="form-group">

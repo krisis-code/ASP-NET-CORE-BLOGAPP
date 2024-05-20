@@ -13,7 +13,7 @@ namespace Blog.Entity.Entities
 
         public string LastName { get; set; }
 
-        public Guid ImageId { get; set; }
+        public Guid ImageId { get; set; } = Guid.Parse("B93E0A19-EA35-4121-985A-5D2E33720DE4");
 
         public Image Image { get; set; }
         
