@@ -38,6 +38,7 @@ namespace Blog.web.Areas.Admin.Controllers
 		public async Task<IActionResult> Add()
 		{
 			var roles = await roleManager.Roles.ToListAsync();
+			return View(new UserAddDto { Roles = roles });
 		}
 	}
 }
