@@ -11,12 +11,14 @@ namespace Blog.web.Areas.Admin.Controllers
 	public class UserController : Controller
 	{
 		private readonly UserManager<AppUser> userManager;
-		private readonly IMapper mapper;
+        private readonly RoleManager<AppRole> roleManager;
+        private readonly IMapper mapper;
 
-		public UserController(UserManager<AppUser> userManager,IMapper mapper)
+		public UserController(UserManager<AppUser> userManager,RoleManager<AppRole> roleManager,IMapper mapper)
         {
 			this.userManager = userManager;
-			this.mapper = mapper;
+            this.roleManager = roleManager;
+            this.mapper = mapper;
 		}
         public async Task  <IActionResult> Index()
 		{
@@ -32,6 +34,10 @@ namespace Blog.web.Areas.Admin.Controllers
 			}
 
 			return View(map);
+		}
+		public async Task<IActionResult> Add()
+		{
+			var roles = await roleManager.Roles.ToListAsync();
 		}
 	}
 }
