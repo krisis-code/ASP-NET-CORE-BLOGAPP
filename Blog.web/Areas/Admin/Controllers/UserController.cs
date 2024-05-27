@@ -74,6 +74,19 @@ namespace Blog.web.Areas.Admin.Controllers
 
         }
 
+		[HttpGet]
+		public async Task<IActionResult> Update(Guid userId)
+		{
+			var user = await userManager.FindByIdAsync(userId.ToString());
+
+			var role = await roleManager.Roles.ToListAsync();
+
+			var map = mapper.Map<UserUpdateDto>(user);
+
+			return View(map);
+
+		}
+
       
         }
 
