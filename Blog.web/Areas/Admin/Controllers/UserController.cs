@@ -106,7 +106,7 @@ namespace Blog.web.Areas.Admin.Controllers
 						await userManager.RemoveFromRoleAsync(user, userRole);
 						var findRole = await roleManager.FindByIdAsync(userUpdateDto.RoleId.ToString());
 						await userManager.AddToRoleAsync(user, findRole.Name);
-                        toastNotification.AddSuccessToastMessage(Messages.User.Add(userUpdateDto.Email), new ToastrOptions { Title = "Başarılı"! });
+                        toastNotification.AddSuccessToastMessage(Messages.User.Update(userUpdateDto.Email), new ToastrOptions { Title = "Başarılı"! });
                         return RedirectToAction("Index", "User", new { area = "Admin" });
                     }
 					else
@@ -131,7 +131,7 @@ namespace Blog.web.Areas.Admin.Controllers
 			var result = await userManager.DeleteAsync(user);
 			if (result.Succeeded)
 			{
-                toastNotification.AddSuccessToastMessage(Messages.User.Add(user.Email), new ToastrOptions { Title = "Başarılı"! });
+                toastNotification.AddSuccessToastMessage(Messages.User.Delete(user.Email), new ToastrOptions { Title = "Başarılı"! });
                 return RedirectToAction("Index", "User", new { area = "Admin" });
             }
 			else
