@@ -79,9 +79,10 @@ namespace Blog.web.Areas.Admin.Controllers
 		{
 			var user = await userManager.FindByIdAsync(userId.ToString());
 
-			var role = await roleManager.Roles.ToListAsync();
+			var roles = await roleManager.Roles.ToListAsync();
 
 			var map = mapper.Map<UserUpdateDto>(user);
+			map.Roles = roles;
 
 			return View(map);
 
