@@ -125,6 +125,27 @@ namespace Blog.web.Areas.Admin.Controllers
 
         }
 
+		public async Task<IActionResult> Delete(Guid userId)
+		{
+			var user = await userManager.FindByIdAsync(userId.ToString());
+			var result = await userManager.DeleteAsync(user);
+			if (result.Succeeded)
+			{
+                toastNotification.AddSuccessToastMessage(Messages.User.Add(user.Email), new ToastrOptions { Title = "Başarılı"! });
+                return RedirectToAction("Index", "User", new { area = "Admin" });
+            }
+			else
+			{
+
+                foreach (var errors in result.Errors)
+                    ModelState.AddModelError("", errors.Description);
+            }
+			return NotFound();
+
+
+		}
+
+
       
         }
 
