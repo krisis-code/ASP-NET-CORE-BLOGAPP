@@ -87,6 +87,43 @@ namespace Blog.web.Areas.Admin.Controllers
 			return View(map);
 
 		}
+		[HttpPost]
+		public async Task<IActionResult> Update(UserUpdateDto userUpdateDto)
+		{
+			var user = await userManager.FindByIdAsync(userUpdateDto.Id.ToString());
+			if (user != null)
+			{
+				var userRole = string.Join("", await userManager.GetRolesAsync(user));
+				var roles = await roleManager.Roles.ToListAsync();
+				if (ModelState.IsValid)
+				{
+					mapper.Map(userUpdateDto, user);
+					user.UserName = userUpdateDto.Email;
+					user.SecurityStamp = Guid.NewGuid().ToString();
+					var result = await userManager.UpdateAsync(user);
+					if (result.Succeeded)
+					{
+						await userManager.RemoveFromRoleAsync(user, userRole);
+						var findRole = await roleManager.FindByIdAsync(userUpdateDto.RoleId.ToString());
+						await userManager.AddToRoleAsync(user, findRole.Name);
+                        toastNotification.AddSuccessToastMessage(Messages.User.Add(userUpdateDto.Email), new ToastrOptions { Title = "Başarılı"! });
+                        return RedirectToAction("Index", "User", new { area = "Admin" });
+                    }
+					else
+					{
+                        foreach (var errors in result.Errors)
+                            ModelState.AddModelError("", errors.Description);
+
+                        return View(new UserAddDto { Roles = roles });
+                    }
+				}
+				
+
+			}
+            return NotFound();
+
+
+        }
 
       
         }
