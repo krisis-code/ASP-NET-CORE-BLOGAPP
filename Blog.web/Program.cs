@@ -1,6 +1,7 @@
 using Blog.Data.Context;
 using Blog.Data.Extensions;
 using Blog.Entity.Entities;
+using Blog.Service.Describers;
 using Microsoft.AspNetCore.Identity;
 using NToastNotify;
 
@@ -24,6 +25,7 @@ builder.Services.AddIdentity<AppUser, AppRole>(opt =>
     opt.Password.RequireUppercase = false;
 })
     .AddRoleManager<RoleManager<AppRole>>()
+    .AddErrorDescriber<CustomIdentityErrorDecriber>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
