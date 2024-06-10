@@ -14,20 +14,17 @@ namespace Blog.Service.FluentValidations
         {
             RuleFor(x => x.FirstName)
                .NotEmpty()
-               .NotNull()
                .MinimumLength(3)
                .MaximumLength(50)
                .WithName("İsim");
             RuleFor(x => x.LastName)
               .NotEmpty()
-              .NotNull()
               .MinimumLength(3)
               .MaximumLength(50)
               .WithName("Soyisim");
 
             RuleFor(x => x.PhoneNumber)
             .NotEmpty()
-            .NotNull()
             .MinimumLength(11)
             .WithName("Telefon Numarası");
         }

@@ -2,11 +2,15 @@
 using Blog.Entity.DTOs.Articles;
 using Blog.Entity.DTOs.Users;
 using Blog.Entity.Entities;
+using Blog.Service.Extensions;
 using Blog.web.Areas.ResultMessages;
+using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NToastNotify;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Blog.web.Areas.Admin.Controllers
 {
@@ -14,13 +18,15 @@ namespace Blog.web.Areas.Admin.Controllers
 	public class UserController : Controller
 	{
 		private readonly UserManager<AppUser> userManager;
+        private readonly IValidator<AppUser> validator;
         private readonly IToastNotification toastNotification;
         private readonly RoleManager<AppRole> roleManager;
         private readonly IMapper mapper;
 
-		public UserController(UserManager<AppUser> userManager,IToastNotification toastNotification,RoleManager<AppRole> roleManager,IMapper mapper)
+		public UserController(UserManager<AppUser> userManager,IValidator<AppUser> validator,IToastNotification toastNotification,RoleManager<AppRole> roleManager,IMapper mapper)
         {
 			this.userManager = userManager;
+            this.validator = validator;
             this.toastNotification = toastNotification;
             this.roleManager = roleManager;
             this.mapper = mapper;
@@ -50,6 +56,7 @@ namespace Blog.web.Areas.Admin.Controllers
         public async Task<IActionResult> Add(UserAddDto userAddDto)
         {
 			var map = mapper.Map<AppUser>(userAddDto);
+			var validation = await validator.ValidateAsync(map);	
             var roles = await roleManager.Roles.ToListAsync();
             if (ModelState.IsValid)
 			{
@@ -66,6 +73,7 @@ namespace Blog.web.Areas.Admin.Controllers
                 {
                     foreach (var errors in result.Errors)
 								ModelState.AddModelError("",errors.Description);
+					validation.AddToModelState(this.ModelState);
                   
                     return View(new UserAddDto { Roles = roles });
                 }
@@ -91,14 +99,18 @@ namespace Blog.web.Areas.Admin.Controllers
 		public async Task<IActionResult> Update(UserUpdateDto userUpdateDto)
 		{
 			var user = await userManager.FindByIdAsync(userUpdateDto.Id.ToString());
+
 			if (user != null)
 			{
 				var userRole = string.Join("", await userManager.GetRolesAsync(user));
 				var roles = await roleManager.Roles.ToListAsync();
 				if (ModelState.IsValid)
 				{
-					mapper.Map(userUpdateDto, user);
-					user.UserName = userUpdateDto.Email;
+                    var map = mapper.Map(userUpdateDto, user);
+					var validation = await validator.ValidateAsync(map);
+				if (validation.IsValid)
+					{ 
+                    user.UserName = userUpdateDto.Email;
 					user.SecurityStamp = Guid.NewGuid().ToString();
 					var result = await userManager.UpdateAsync(user);
 					if (result.Succeeded)
@@ -113,10 +125,19 @@ namespace Blog.web.Areas.Admin.Controllers
 					{
                         foreach (var errors in result.Errors)
                             ModelState.AddModelError("", errors.Description);
-
-                        return View(new UserAddDto { Roles = roles });
+                      
+							return View(new UserUpdateDto { Roles = roles });
                     }
-				}
+                }
+                    else
+                    {
+
+                        validation.AddToModelState(this.ModelState);
+                        return View(new UserUpdateDto { Roles = roles });
+
+                    }
+
+                }
 				
 
 			}
@@ -139,6 +160,7 @@ namespace Blog.web.Areas.Admin.Controllers
 
                 foreach (var errors in result.Errors)
                     ModelState.AddModelError("", errors.Description);
+             
             }
 			return NotFound();
 
