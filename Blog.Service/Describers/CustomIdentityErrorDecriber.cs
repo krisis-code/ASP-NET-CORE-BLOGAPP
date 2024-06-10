@@ -9,6 +9,10 @@ namespace Blog.Service.Describers
 {
     public class CustomIdentityErrorDecriber : IdentityErrorDescriber
     {
+        public override IdentityError PasswordRequiresUniqueChars (int unique)
+        {
+            return new IdentityError { Code = "PasswordRequiresUniqueChars", Description = $"Şifreniz En az {unique} Farklı karakter." };
+        }
         public override IdentityError DuplicateEmail(string email)
         {
             return new IdentityError { Code = "DublicateEmail", Description = $"Bu email {email} adresine ait bir hesap zaten var." };
