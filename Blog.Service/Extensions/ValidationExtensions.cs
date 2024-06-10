@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Blog.Service.Extensions
 {
-    public static class FluentValidationExtensions
+    public static class ValidationExtensions
     {
         public static void AddToModelState(this ValidationResult result, ModelStateDictionary modelState)
         {

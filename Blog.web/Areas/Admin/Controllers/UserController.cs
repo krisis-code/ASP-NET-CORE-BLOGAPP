@@ -71,8 +71,9 @@ namespace Blog.web.Areas.Admin.Controllers
                 }
                 else
                 {
-                    foreach (var errors in result.Errors)
-								ModelState.AddModelError("",errors.Description);
+					//            foreach (var errors in result.Errors)
+					//ModelState.AddModelError("",errors.Description);
+					result.AddToIdentityModelState(this.ModelState);
 					validation.AddToModelState(this.ModelState);
                   
                     return View(new UserAddDto { Roles = roles });
@@ -123,8 +124,8 @@ namespace Blog.web.Areas.Admin.Controllers
                     }
 					else
 					{
-                        foreach (var errors in result.Errors)
-                            ModelState.AddModelError("", errors.Description);
+                            result.AddToIdentityModelState(this.ModelState);
+                            //ModelState.AddModelError("", errors.Description);
                       
 							return View(new UserUpdateDto { Roles = roles });
                     }
@@ -158,9 +159,8 @@ namespace Blog.web.Areas.Admin.Controllers
 			else
 			{
 
-                foreach (var errors in result.Errors)
-                    ModelState.AddModelError("", errors.Description);
-             
+                result.AddToIdentityModelState(this.ModelState);
+
             }
 			return NotFound();
 
