@@ -28,12 +28,18 @@ namespace Blog.web.Areas.Admin.Controllers
             this.validator = validator;
             this.toastNotification = toastNotification;
         }
+        [HttpGet]
         public async Task <IActionResult> Index()
         {
             var articles = await articleService.GetAllArticlesWithCategoryNonDeletedAsync();
             return View(articles);
         }
-
+        [HttpGet]
+        public async Task<IActionResult> DeletedArticles()
+        {
+            var articles = await articleService.GetAllArticlesWithCategoryNonDeletedAsync();
+            return View(articles);
+        }
         [HttpGet]
         public async Task<IActionResult> Add()
         {
