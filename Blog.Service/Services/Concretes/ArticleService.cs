@@ -102,7 +102,12 @@ namespace Blog.Data.Repositories.Concretes
             return article.Title;
         }
 
-      
+        public async Task<List<ArticleDto>> GetAllWithCategoryArticlesDeletedAsync()
+        {
+            var articles = await unitOfWork.GetRepository<Article>().GetAllAsync(x => x.IsDeleted, x => x.Category);
+            var map = mapper.Map<List<ArticleDto>>(articles);
+            return map;
+        }
 
         public async Task<string> UndoDeleteArticleAsync(Guid articleId)
         {
@@ -118,11 +123,6 @@ namespace Blog.Data.Repositories.Concretes
             return article.Title;
         }
 
-        public async Task<List<ArticleDto>> GetAllWithCategoryArticlesDeletedAsync()
-        {
-            var articles = await unitOfWork.GetRepository<Article>().GetAllAsync(x => x.IsDeleted, x => x.Category);
-            var map = mapper.Map<List<ArticleDto>>(articles);
-            return map;
-        }
+       
     }
 }

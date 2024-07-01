@@ -18,6 +18,10 @@
             {
                 return $"{articleTitle} başlıklı makale başarıyla silinmiştir.";
             }
+            public static string UndoDelete(string articleTitle)
+            {
+                return $"{articleTitle} başlıklı makale başarıyla geri  eklenmiştir.";
+            }
         }
 
         public static class Category
