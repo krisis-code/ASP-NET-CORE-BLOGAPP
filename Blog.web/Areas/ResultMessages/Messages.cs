@@ -40,6 +40,10 @@
             {
                 return $"{categoryName}  isimli kategori başarıyla silinmiştir.";
             }
+            public static string UndoDelete(string categoryName)
+            {
+                return $"{categoryName}  isimli kategori başarıyla geri alınmıştır.";
+            }
         }
 
         public static class User

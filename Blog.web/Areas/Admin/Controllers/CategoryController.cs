@@ -113,7 +113,7 @@ namespace Blog.web.Areas.Admin.Controllers
         public async Task<IActionResult> UndoDelete(Guid categoryId)
         {
             var title = await categoryService.UndoDeleteCategoryAsync(categoryId);
-            toastNotification.AddInfoToastMessage(Messages.Article.UndoDelete(title), new ToastrOptions { Title = "Başarılı" });
+            toastNotification.AddInfoToastMessage(Messages.Category.UndoDelete(title), new ToastrOptions { Title = "Başarılı" });
             return RedirectToAction("Index", "Category", new { area = "Admin" });
         }
     }

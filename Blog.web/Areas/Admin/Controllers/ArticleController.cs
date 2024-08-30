@@ -116,7 +116,7 @@ namespace Blog.web.Areas.Admin.Controllers
             toastNotification.AddInfoToastMessage(Messages.Article.Delete(title), new ToastrOptions { Title = "Başarılı" });
             return RedirectToAction("Index", "Article", new { area = "Admin" });
         }
-        public async Task<IActionResult> UndoDeleteArticleAsync(Guid articleId)
+        public async Task<IActionResult> UndoDelete(Guid articleId)
         {
             var title = await articleService.UndoDeleteArticleAsync(articleId);
             toastNotification.AddInfoToastMessage(Messages.Article.UndoDelete(title), new ToastrOptions { Title = "Başarılı" });

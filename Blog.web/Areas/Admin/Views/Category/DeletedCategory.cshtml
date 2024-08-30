@@ -43,9 +43,9 @@
                             <td>@category.CreatedBy</td>
                             <td>@(category.IsDeleted ? "Aktif Değil" : "Aktif")</td>
                             <td>
-                                <a class="btn btn-primary btn-sm" data-id="@category.Id" asp-area="Admin" asp-controller="Category" asp-action="Update" asp-route-categoryId="@category.Id"><i class="bx bx-undo"></i></a>
-                                <a class="btn btn-danger btn-sm" data-id="@category.Id" asp-area="Admin" asp-controller="Category" asp-action="UndoDelete" asp-route-categoryId="@category.Id"><i class="bx bx-minus-circle"></i></a>
-
+                                <a class="btn btn-warning btn-sm" data-id="@category.Id" asp-area="Admin" asp-controller="Category" asp-action="UndoDelete" asp-route-categoryId="@category.Id"><i class="bx bx-undo"></i></a>
+                                @* <a class="btn btn-danger btn-sm" data-id="@category.Id" asp-area="Admin" asp-controller="Category" asp-action="UndoDelete" asp-route-categoryId="@category.Id"><i class="bx bx-minus-circle"></i></a>
+ *@
                             </td>
                         </tr>
                     }
