@@ -5,6 +5,7 @@ using Blog.Entity.Entities;
 using Blog.Service.Extensions;
 using Blog.Service.Services.Abstractions;
 using Blog.web.Areas.ResultMessages;
+using Blog.web.Consts;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -30,21 +31,21 @@ namespace Blog.web.Areas.Admin.Controllers
             this.toastNotification = toastNotification;
         }
         [HttpGet]
-        [Authorize(Roles ="Superadmin,Admin,User")]
+        [Authorize(Roles = $"{RoleConsts.Superadmin},{RoleConsts.Admin},{RoleConsts.User}")]
         public async Task <IActionResult> Index()
         {
             var articles = await articleService.GetAllArticlesWithCategoryNonDeletedAsync();
             return View(articles);
         }
         [HttpGet]
-        [Authorize(Roles = "Superadmin,Admin")]
+        [Authorize(Roles = $"{RoleConsts.Superadmin},{RoleConsts.Admin}")]
         public async Task<IActionResult> DeletedArticle()
         {
             var articles = await articleService.GetAllWithCategoryArticlesDeletedAsync();
             return View(articles);
         }
         [HttpGet]
-        [Authorize(Roles = "Superadmin,Admin")]
+        [Authorize(Roles = $"{RoleConsts.Superadmin},{RoleConsts.Admin}")]
         public async Task<IActionResult> Add()
         {
            
@@ -55,7 +56,7 @@ namespace Blog.web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Superadmin,Admin")]
+        [Authorize(Roles = $"{RoleConsts.Superadmin},{RoleConsts.Admin}")]
         public async Task<IActionResult> Add(ArticleAddDto articleAddDto)
         {
             var map = mapper.Map<Article>(articleAddDto);
@@ -79,7 +80,7 @@ namespace Blog.web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Superadmin,Admin")]
+        [Authorize(Roles = $"{RoleConsts.Superadmin},{RoleConsts.Admin}")]
         public async Task<IActionResult> Update(Guid articleId)
         {
             var article = await articleService.GetArticlesWithCategoryNonDeletedAsync(articleId);
@@ -90,7 +91,7 @@ namespace Blog.web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Superadmin,Admin")]
+        [Authorize(Roles = $"{RoleConsts.Superadmin},{RoleConsts.Admin}")]
         public async Task<IActionResult> Update(ArticleUpdateDto articleUpdateDto)
         {
             var map = mapper.Map<Article>(articleUpdateDto);
@@ -116,14 +117,14 @@ namespace Blog.web.Areas.Admin.Controllers
             return View(articleUpdateDto);
 
         }
-        [Authorize(Roles = "Superadmin,Admin")]
+        [Authorize(Roles = $"{RoleConsts.Superadmin},{RoleConsts.Admin}")]
         public async Task<IActionResult> Delete(Guid articleId)
         {
             var title =  await articleService.SafeDeleteArticleAsync(articleId);
             toastNotification.AddInfoToastMessage(Messages.Article.Delete(title), new ToastrOptions { Title = "Başarılı" });
             return RedirectToAction("Index", "Article", new { area = "Admin" });
         }
-        [Authorize(Roles = "Superadmin,Admin")]
+        [Authorize(Roles = $"{RoleConsts.Superadmin},{RoleConsts.Admin}")]
         public async Task<IActionResult> UndoDelete(Guid articleId)
         {
             var title = await articleService.UndoDeleteArticleAsync(articleId);

@@ -1,4 +1,4 @@
-﻿@model AppUser
+﻿@model UserDto
 
 <li class="nav-item navbar-dropdown dropdown-user dropdown">
     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
@@ -17,7 +17,7 @@
                     </div>
                     <div class="flex-grow-1">
                         <span class="fw-semibold d-block">@Model.FirstName @Model.LastName</span>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted">@Model.Role</small>
                     </div>
                 </div>
             </a>
@@ -50,9 +50,9 @@
             <div class="dropdown-divider"></div>
         </li>
         <li>
-            <a class="dropdown-item" href="auth-login-basic.html">
+            <a class="dropdown-item" asp-area="Admin" asp-controller="Auth" asp-action="Logout">
                 <i class="bx bx-power-off me-2"></i>
-                <span class="align-middle">Log Out</span>
+                <span  class="align-middle">Log Out</span>
             </a>
         </li>
     </ul>

@@ -1,4 +1,5 @@
-﻿
+﻿@using Blog.web.Consts
+
 @model List<ArticleDto>
 
 <div class="container-xxl flex-grow-1 container-p-y">
@@ -9,7 +10,7 @@
     
     <!-- Basic Bootstrap Table -->
     <div class="card">
-        @if (!User.IsInRole("User"))
+        @if (!User.IsInRole($"{RoleConsts.User}"))
         {
             <a class="btn btn-success" asp-area="Admin" asp-controller="Article" asp-action="Add">Yeni Makale Ekle <i class="bx bx-plus"></i></a>
         }
@@ -25,7 +26,7 @@
                         <th>Oluşturulma Tarihi</th>
                         <th>Oluşturan</th>
                         <th>Durum</th>
-                        @if (!User.IsInRole("User"))
+                        @if (!User.IsInRole($"{RoleConsts.User}"))
                         {
                             <th>İşlem</th>
                         }
@@ -40,7 +41,7 @@
                         <th>Oluşturulma Tarihi</th>
                         <th>Oluşturan</th>
                         <th>Durum</th>
-                        @if (!User.IsInRole("User"))
+                        @if (!User.IsInRole($"{RoleConsts.User}"))
                         {
                             <th>İşlem</th>
                         }
@@ -56,7 +57,7 @@
                             <th>@article.CreatedDate.ToShortDateString()</th>
                             <th>@article.CreatedBy</th>  
                             <th>@(article.IsDeleted ? "Pasif" : "Aktif")</th>
-                            @if (!User.IsInRole("User"))
+                            @if (!User.IsInRole($"{RoleConsts.User}"))
                             {
                                 <th>
 
