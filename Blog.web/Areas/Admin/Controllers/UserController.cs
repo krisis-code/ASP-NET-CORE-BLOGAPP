@@ -167,9 +167,14 @@ namespace Blog.web.Areas.Admin.Controllers
 
 		}
 
-
-      
+        [HttpGet]
+        public async Task<IActionResult> Profile()
+        {
+          var user = await userManager.GetUserAsync(HttpContext.User);
+            return View();
         }
+
+    }
 
     }
 

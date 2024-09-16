@@ -1,0 +1,112 @@
+﻿<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Hesap Ayarları /</span> Hesap</h4>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="card mb-4">
+                <h5 class="card-header">Profil Detayları</h5>
+                <!-- Hesap -->
+                <div class="card-body">
+                    <div class="d-flex align-items-start align-items-sm-center gap-4">
+                        <img src="../assets/img/avatars/1.png"
+                             alt="kullanıcı-avatarı"
+                             class="d-block rounded"
+                             height="100"
+                             width="100"
+                             id="uploadedAvatar" />
+                        <div class="button-wrapper">
+                            <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                <span class="d-none d-sm-block">Yeni fotoğraf yükle</span>
+                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                <input type="file"
+                                       id="upload"
+                                       class="account-file-input"
+                                       hidden
+                                       accept="image/png, image/jpeg" />
+                            </label>
+                            <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                                <i class="bx bx-reset d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Sıfırla</span>
+                            </button>
+
+
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-0" />
+                <div class="card-body">
+                    <form id="formAccountSettings" method="POST" onsubmit="return false">
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label for="firstName" class="form-label">Ad</label>
+                                <input class="form-control"
+                                       type="text"
+                                       id="firstName"
+                                       name="firstName"
+                                       value="John"
+                                       autofocus />
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label for="lastName" class="form-label">Soyad</label>
+                                <input class="form-control" type="text" name="lastName" id="lastName" value="Doe" />
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label for="email" class="form-label">E-posta</label>
+                                <input class="form-control"
+                                       type="text"
+                                       id="email"
+                                       name="email"
+                                       value="john.doe@example.com"
+                                       placeholder="john.doe@example.com" />
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label for="organization" class="form-label">Organizasyon</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="organization"
+                                       name="organization"
+                                       value="ThemeSelection" />
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label" for="phoneNumber">Telefon Numarası</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text">TR (+90)</span>
+                                    <input type="text"
+                                           id="phoneNumber"
+                                           name="phoneNumber"
+                                           class="form-control"
+                                           placeholder="532 123 4567" />
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label for="address" class="form-label">Adres</label>
+                                <input type="text" class="form-control" id="address" name="address" placeholder="Adres" />
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label for="state" class="form-label">Şehir</label>
+                                <input class="form-control" type="text" id="state" name="state" placeholder="İstanbul" />
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label for="zipCode" class="form-label">Posta Kodu</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="zipCode"
+                                       name="zipCode"
+                                       placeholder="123456"
+                                       maxlength="6" />
+                            </div>
+
+                        </div>
+                        <div class="mt-2">
+                            <button type="submit" class="btn btn-primary me-2">Değişiklikleri Kaydet</button>
+                            <button type="reset" class="btn btn-outline-secondary">İptal</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /Hesap -->
+            </div>
+
+        </div>
+    </div>
+</div>
