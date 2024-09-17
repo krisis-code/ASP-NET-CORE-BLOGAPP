@@ -8,9 +8,11 @@
 
             <div class="card mb-4">
                 <h5 class="card-header">Profil Detayları</h5>
+                <form asp-controller="User" asp-action="Profile" method="post" enctype="multipart/form-data">
                 <div class="card-body">
+
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
-                        <img src="../assets/img/avatars/1.png"
+                        <img src="~/images/user-iamges/@Model.Image.FileName"
                              alt="kullanıcı-avatarı"
                              class="d-block rounded"
                              height="100"
@@ -20,19 +22,16 @@
                             <label  class="btn btn-primary me-2 mb-4" tabindex="0">
                                 <span class="d-none d-sm-block">Yeni fotoğraf yükle</span>
                                 <i class="bx bx-upload d-block d-sm-none"></i>
-                                <input 
-                                       type="file"
-                                       id="upload"
-                                       class="account-file-input"
-                                       hidden
-                                       accept="image/png, image/jpeg" />
+                                    <input asp-for="Photo" type="file" accept="image/*" class="form-control mb-3" id="defaultFormControlInput" aria-describedby="defaultFormControlHelp">
                             </label>
+
+
                         </div>
                     </div>
                 </div>
                 <hr class="my-0" />
                 <div class="card-body">
-                    <form asp-controller="User" asp-action="Profile" method="post" enctype="multipart/form-data">
+                    
                         <div class="row">
                             <div class="mb-3 col-md-6">
                                 <label asp-for="FirstName" class="form-label">Ad</label>
@@ -55,9 +54,9 @@
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label asp-for="Email" class="form-label">E-posta</label>
-                                <input asp-for="Email" class="form-control" />
-                                <span asp-validation-for="Email" class="text-danger"></span>
+                                <input asp-for="Email" class="form-control" readonly />
                             </div>
+
                             <div class="mb-3 col-md-6">
                                 <label asp-for="CurrentPassword" class="form-label">Şifreniz</label>
                                 <input asp-for="CurrentPassword" type="password" class="form-control" />

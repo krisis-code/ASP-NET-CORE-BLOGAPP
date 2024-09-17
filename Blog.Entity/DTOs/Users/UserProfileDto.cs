@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Blog.Entity.Entities;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -20,6 +22,10 @@ namespace Blog.Entity.DTOs.Users
         public string CurrentPassword { get; set; }
 
         public string? NewPassword { get; set; }
+
+        public IFormFile? Photo { get; set; }
+
+        public Image Image { get; set; }
 
     }
 }
