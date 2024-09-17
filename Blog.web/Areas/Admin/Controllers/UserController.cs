@@ -7,6 +7,7 @@ using Blog.Entity.Entities;
 using Blog.Entity.Enums;
 using Blog.Service.Extensions;
 using Blog.Service.Helpers.Image;
+using Blog.Service.Services.Abstractions;
 using Blog.web.Areas.ResultMessages;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
@@ -23,7 +24,8 @@ namespace Blog.web.Areas.Admin.Controllers
 	public class UserController : Controller
 	{
 		private readonly UserManager<AppUser> userManager;
-		private readonly SignInManager<AppUser> signInManager;
+        private readonly IUserService userService;
+        private readonly SignInManager<AppUser> signInManager;
         private readonly IImageHelper imageHelper;
         private readonly IUnitOfWork unitOfWork;
         private readonly IValidator<AppUser> validator;
@@ -31,10 +33,11 @@ namespace Blog.web.Areas.Admin.Controllers
 		private readonly RoleManager<AppRole> roleManager;
 		private readonly IMapper mapper;
 
-		public UserController(UserManager<AppUser> userManager, IValidator<AppUser> validator, IToastNotification toastNotification, RoleManager<AppRole> roleManager, IMapper mapper, SignInManager<AppUser> signInManager, IImageHelper imageHelper, IUnitOfWork unitOfWork)
+		public UserController(UserManager<AppUser> userManager,IUserService userService, IValidator<AppUser> validator, IToastNotification toastNotification, RoleManager<AppRole> roleManager, IMapper mapper, SignInManager<AppUser> signInManager, IImageHelper imageHelper, IUnitOfWork unitOfWork)
 		{
 			this.userManager = userManager;
-			this.validator = validator;
+            this.userService = userService;
+            this.validator = validator;
 			this.toastNotification = toastNotification;
 			this.roleManager = roleManager;
 			this.mapper = mapper;
@@ -44,18 +47,7 @@ namespace Blog.web.Areas.Admin.Controllers
         }
 		public async Task<IActionResult> Index()
 		{
-			var users = await userManager.Users.ToListAsync();
-			var map = mapper.Map<List<UserDto>>(users);
-
-			foreach (var item in map)
-			{
-				var findUser = await userManager.FindByIdAsync(item.Id.ToString());
-				var role = string.Join("", await userManager.GetRolesAsync(findUser));
-				item.Role = role;
-
-			}
-
-			return View(map);
+			return View(await userService.GetAllUserWithRoleAsync());
 		}
 		[HttpGet]
 		public async Task<IActionResult> Add()
