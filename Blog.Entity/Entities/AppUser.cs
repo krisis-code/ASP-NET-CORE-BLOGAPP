@@ -14,7 +14,7 @@ namespace Blog.Entity.Entities
 
         public string LastName { get; set; }
 
-        public Guid ImageId { get; set; } = Guid.Parse("B93E0A19-EA35-4121-985A-5D2E33720DE4");
+        public Guid? ImageId { get; set; } = Guid.Parse("ffcabb50-7bec-42ca-a1da-def436c61777");
 
         public Image Image { get; set; }
         
