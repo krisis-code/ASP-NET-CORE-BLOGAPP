@@ -98,12 +98,12 @@ namespace Blog.web.Areas.Admin.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Update(UserUpdateDto userUpdateDto)
 		{
-			var user = await userManager.FindByIdAsync(userUpdateDto.Id.ToString());
+			var user = await userService.GetAppUserByIdAsync(userUpdateDto.Id);
 
 			if (user != null)
 			{
-				var userRole = string.Join("", await userManager.GetRolesAsync(user));
-				var roles = await roleManager.Roles.ToListAsync();
+				var userRole = await userService.GetUserRoleAsync(user);
+				var roles = await userService.GetAllRolesAsync();
 				if (ModelState.IsValid)
 				{
 					var map = mapper.Map(userUpdateDto, user);
@@ -112,20 +112,15 @@ namespace Blog.web.Areas.Admin.Controllers
 					{
 						user.UserName = userUpdateDto.Email;
 						user.SecurityStamp = Guid.NewGuid().ToString();
-						var result = await userManager.UpdateAsync(user);
+						var result = await userService.UpdateUserAsync(userUpdateDto);
 						if (result.Succeeded)
 						{
-							await userManager.RemoveFromRoleAsync(user, userRole);
-							var findRole = await roleManager.FindByIdAsync(userUpdateDto.RoleId.ToString());
-							await userManager.AddToRoleAsync(user, findRole.Name);
 							toastNotification.AddSuccessToastMessage(Messages.User.Update(userUpdateDto.Email), new ToastrOptions { Title = "Başarılı"! });
 							return RedirectToAction("Index", "User", new { area = "Admin" });
 						}
 						else
 						{
 							result.AddToIdentityModelState(this.ModelState);
-							//ModelState.AddModelError("", errors.Description);
-
 							return View(new UserUpdateDto { Roles = roles });
 						}
 					}
@@ -148,17 +143,17 @@ namespace Blog.web.Areas.Admin.Controllers
 
 		public async Task<IActionResult> Delete(Guid userId)
 		{
-			var user = await userManager.FindByIdAsync(userId.ToString());
-			var result = await userManager.DeleteAsync(user);
-			if (result.Succeeded)
+			
+			var result = await userService.DeleteUserAsync(userId);
+			if (result.identityResult.Succeeded)
 			{
-				toastNotification.AddSuccessToastMessage(Messages.User.Delete(user.Email), new ToastrOptions { Title = "Başarılı"! });
+				toastNotification.AddSuccessToastMessage(Messages.User.Delete(result.email), new ToastrOptions { Title = "Başarılı"! });
 				return RedirectToAction("Index", "User", new { area = "Admin" });
 			}
 			else
 			{
 
-				result.AddToIdentityModelState(this.ModelState);
+				result.identityResult.AddToIdentityModelState(this.ModelState);
 
 			}
 			return NotFound();

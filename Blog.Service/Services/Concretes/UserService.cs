@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Service.Services.Concretes
 {
+    
     public class UserService : IUserService
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -43,6 +44,16 @@ namespace Blog.Service.Services.Concretes
                 return result;
         }
 
+        public async Task<(IdentityResult identityResult, string? email)> DeleteUserAsync(Guid userId)
+        {
+            var user = await GetAppUserByIdAsync(userId);
+            var result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded) 
+               return (result,user.Email);
+            else
+                return (result,null);
+        }
+
         public async Task<List<AppRole>> GetAllRolesAsync()
         {
             return await _roleManager.Roles.ToListAsync();
@@ -67,6 +78,27 @@ namespace Blog.Service.Services.Concretes
         public async Task<AppUser> GetAppUserByIdAsync(Guid userId)
         {
             return await _userManager.FindByIdAsync(userId.ToString());
+        }
+
+        public async Task<string> GetUserRoleAsync(AppUser user)
+        {
+            return string.Join("", await _userManager.GetRolesAsync(user));
+        }
+
+        public async Task<IdentityResult> UpdateUserAsync(UserUpdateDto userUpdateDto)
+        {
+            var user = await GetAppUserByIdAsync(userUpdateDto.Id);
+            var userRole = await GetUserRoleAsync(user);
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                await _userManager.RemoveFromRoleAsync(user, userRole);
+                var findRole = await _roleManager.FindByIdAsync(userUpdateDto.RoleId.ToString());
+                await _userManager.AddToRoleAsync(user, findRole.Name);
+                return result;
+            }
+            else
+                return result;
         }
     }
 }
