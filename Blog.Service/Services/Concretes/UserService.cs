@@ -28,6 +28,26 @@ namespace Blog.Service.Services.Concretes
             _roleManager = roleManager;
         }
 
+        public async Task<IdentityResult> CreateUserAsync(UserAddDto userAddDto)
+        {
+            var map = _mapper.Map<AppUser>(userAddDto);
+            map.UserName = userAddDto.Email;
+            var result = await _userManager.CreateAsync(map, string.IsNullOrEmpty(userAddDto.Password) ? "" : userAddDto.Password);
+            if (result.Succeeded)
+            {
+                var findRole = await _roleManager.FindByIdAsync(userAddDto.RoleId.ToString());
+                await _userManager.AddToRoleAsync(map, findRole.ToString());
+                return result;
+            }
+            else
+                return result;
+        }
+
+        public async Task<List<AppRole>> GetAllRolesAsync()
+        {
+            return await _roleManager.Roles.ToListAsync();
+        }
+
         public async Task<List<UserDto>> GetAllUserWithRoleAsync()
         {
             var users = await _userManager.Users.ToListAsync();
@@ -42,6 +62,11 @@ namespace Blog.Service.Services.Concretes
             }
 
             return map;
+        }
+
+        public async Task<AppUser> GetAppUserByIdAsync(Guid userId)
+        {
+            return await _userManager.FindByIdAsync(userId.ToString());
         }
     }
 }

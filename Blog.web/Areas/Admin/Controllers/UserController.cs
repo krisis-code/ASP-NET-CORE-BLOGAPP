@@ -52,7 +52,7 @@ namespace Blog.web.Areas.Admin.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Add()
 		{
-			var roles = await roleManager.Roles.ToListAsync();
+			var roles = await userService.GetAllRolesAsync();
 			return View(new UserAddDto { Roles = roles });
 		}
 		[HttpPost]
@@ -60,25 +60,21 @@ namespace Blog.web.Areas.Admin.Controllers
 		{
 			var map = mapper.Map<AppUser>(userAddDto);
 			var validation = await validator.ValidateAsync(map);
-			var roles = await roleManager.Roles.ToListAsync();
-			if (ModelState.IsValid)
+			var roles = await userService.GetAllRolesAsync();
+            if (ModelState.IsValid)
 			{
-				map.UserName = userAddDto.Email;
-				var result = await userManager.CreateAsync(map, string.IsNullOrEmpty(userAddDto.Password) ? "" : userAddDto.Password);
+				var result = await userService.CreateUserAsync(userAddDto);
 				if (result.Succeeded)
 				{
-					var findRole = await roleManager.FindByIdAsync(userAddDto.RoleId.ToString());
-					await userManager.AddToRoleAsync(map, findRole.ToString());
+					
 					toastNotification.AddSuccessToastMessage(Messages.User.Add(userAddDto.Email), new ToastrOptions { Title = "Başarılı"! });
 					return RedirectToAction("Index", "User", new { area = "Admin" });
 				}
 				else
 				{
-					//            foreach (var errors in result.Errors)
-					//ModelState.AddModelError("",errors.Description);
+					
 					result.AddToIdentityModelState(this.ModelState);
 					validation.AddToModelState(this.ModelState);
-
 					return View(new UserAddDto { Roles = roles });
 				}
 			}
@@ -89,9 +85,9 @@ namespace Blog.web.Areas.Admin.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Update(Guid userId)
 		{
-			var user = await userManager.FindByIdAsync(userId.ToString());
+			var user = await userService.GetAppUserByIdAsync(userId);
 
-			var roles = await roleManager.Roles.ToListAsync();
+			var roles = await userService.GetAllRolesAsync();
 
 			var map = mapper.Map<UserUpdateDto>(user);
 			map.Roles = roles;
