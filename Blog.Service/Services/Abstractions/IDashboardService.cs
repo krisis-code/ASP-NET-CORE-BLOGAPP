@@ -10,5 +10,7 @@ namespace Blog.Service.Services.Abstractions
     {
         Task<List<int>> GetYearlyArticleCountes();
         Task<int> GetTotalArticleCountes();
+
+        Task<int> GetTotalCategoryCountes();
     }
 }

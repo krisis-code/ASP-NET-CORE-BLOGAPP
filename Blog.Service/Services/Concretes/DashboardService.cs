@@ -40,5 +40,11 @@ namespace Blog.Service.Services.Concretes
             var articleCount = await unitOfWork.GetRepository<Article>().CountAsync();
             return articleCount;
         }
+
+        public async Task<int> GetTotalCategoryCountes()
+        {
+            var CategoryCount = await unitOfWork.GetRepository<Category>().CountAsync();
+            return CategoryCount;
+        }
     }
 }
