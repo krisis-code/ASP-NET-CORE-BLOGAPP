@@ -32,6 +32,13 @@ namespace Blog.Service.Services.Concretes
             return map;
 
         }
+        public async Task<List<CategoryDto>> GetAllCategoriesNonDeletedTake24()
+        {
+            var categories = await unitOfWork.GetRepository<Category>().GetAllAsync(x => !x.IsDeleted);
+            var map = mapper.Map<List<CategoryDto>>(categories);
+         
+            return map.Take(24).ToList();
+        }
         public async Task CreateCategoryAsync(CategoryAddDto categoryAddDto)
         {
           
@@ -103,6 +110,8 @@ namespace Blog.Service.Services.Concretes
 
             return category.Name;
         }
+
+       
     }
 
        
