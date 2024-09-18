@@ -24,27 +24,19 @@ namespace Blog.web.Areas.Admin.Controllers
 	[Area("Admin")]
 	public class UserController : Controller
 	{
-		private readonly UserManager<AppUser> userManager;
-        private readonly IUserService userService;
-        private readonly SignInManager<AppUser> signInManager;
-        private readonly IImageHelper imageHelper;
-        private readonly IUnitOfWork unitOfWork;
-        private readonly IValidator<AppUser> validator;
+		private readonly IUserService userService;
+		private readonly IValidator<AppUser> validator;
 		private readonly IToastNotification toastNotification;
-		private readonly RoleManager<AppRole> roleManager;
 		private readonly IMapper mapper;
 
-		public UserController(UserManager<AppUser> userManager,IUserService userService, IValidator<AppUser> validator, IToastNotification toastNotification, RoleManager<AppRole> roleManager, IMapper mapper, SignInManager<AppUser> signInManager, IImageHelper imageHelper, IUnitOfWork unitOfWork)
+		public UserController(IUserService userService, IValidator<AppUser> validator, IToastNotification toastNotification, IMapper mapper )
 		{
-			this.userManager = userManager;
+			
             this.userService = userService;
             this.validator = validator;
 			this.toastNotification = toastNotification;
-			this.roleManager = roleManager;
 			this.mapper = mapper;
-			this.signInManager = signInManager;
-            this.imageHelper = imageHelper;
-            this.unitOfWork = unitOfWork;
+			
         }
 		public async Task<IActionResult> Index()
 		{
@@ -172,8 +164,6 @@ namespace Blog.web.Areas.Admin.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Profile(UserProfileDto userProfileDto)
 		{
-			var user = await userManager.GetUserAsync(HttpContext.User);
-
 			if (ModelState.IsValid)
 			{
 				var result = await userService.UserProfileUpdateAsync(userProfileDto);
