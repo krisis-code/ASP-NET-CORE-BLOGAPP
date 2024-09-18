@@ -19,6 +19,8 @@ namespace Blog.Data.Context
         public DbSet<Article> Articles { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Image> Images { get; set; }
+        public DbSet<Visitor> Visitor { get; set; }
+        public DbSet<ArticleVisitor> ArticleVisitor { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

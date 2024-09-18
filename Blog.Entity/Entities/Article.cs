@@ -36,6 +36,8 @@ namespace Blog.Entity.Entities
 
         public AppUser User { get; set; }
 
+        public ICollection<ArticleVisitor>ArticleVisitors { get; set; }
+
 
 
 
