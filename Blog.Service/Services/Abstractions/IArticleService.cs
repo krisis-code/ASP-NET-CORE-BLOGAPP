@@ -14,6 +14,8 @@ namespace Blog.Data.Repositories.Abstractions
         Task <string>SafeDeleteArticleAsync(Guid articleId);
         Task<string> UndoDeleteArticleAsync(Guid articleId);
 
+        Task<ArticleListDto> GetAllByPagingAsync(Guid? categoryId, int currentPage = 1, int pageSize = 3, bool isAscending = false);
+
 
     }
 }
