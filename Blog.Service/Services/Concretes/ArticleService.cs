@@ -30,6 +30,12 @@ namespace Blog.Data.Repositories.Concretes
             claims = accessor.HttpContext.User;
         }
 
+
+        public async Task<T> GetAllByPagingAsync(Guid? catergoryId,int currentPage = 1,int pageSize = 3,bool şsAscending = false)
+        {
+
+        }
+
         public async Task CreateArticleAsync(ArticleAddDto articleAddDto)
         {
             //var userId = Guid.Parse("CB94223B-CCB8-4F2F-93D7-0DF96A7F065C");
