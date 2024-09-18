@@ -1,5 +1,6 @@
 ﻿using Blog.Entity.DTOs.Categories;
 using Blog.Entity.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace Blog.Entity.DTOs.Articles
 {
@@ -20,5 +21,8 @@ namespace Blog.Entity.DTOs.Articles
         public string CreatedBy { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        public AppUser User { get; set; }
+        public int ViewCount { get; set; }
     }
 }

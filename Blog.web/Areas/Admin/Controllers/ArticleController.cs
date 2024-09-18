@@ -83,7 +83,7 @@ namespace Blog.web.Areas.Admin.Controllers
         [Authorize(Roles = $"{RoleConsts.Superadmin},{RoleConsts.Admin}")]
         public async Task<IActionResult> Update(Guid articleId)
         {
-            var article = await articleService.GetArticlesWithCategoryNonDeletedAsync(articleId);
+            var article = await articleService.GetArticleWithCategoryNonDeletedAsync(articleId);
             var categories = await categoryService.GetAllCategoriesNonDeleted();
             var articleUpdateDto = mapper.Map<ArticleUpdateDto>(article);
             articleUpdateDto.Categories = categories;
