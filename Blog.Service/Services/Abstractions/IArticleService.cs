@@ -16,6 +16,8 @@ namespace Blog.Data.Repositories.Abstractions
 
         Task<ArticleListDto> GetAllByPagingAsync(Guid? categoryId, int currentPage = 1, int pageSize = 3, bool isAscending = false);
 
+        Task<ArticleListDto> SearchAsync(string keyword, int currentPage = 1, int pageSize = 3, bool isAscending = false);
+
 
     }
 }
