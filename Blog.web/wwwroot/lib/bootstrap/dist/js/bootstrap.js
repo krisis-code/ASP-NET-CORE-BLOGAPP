@@ -4507,7 +4507,7 @@
 
       this._clear();
 
-      const queries = SELECTOR_LINK_ITEMS.split(',').map(selector => `${selector}[data-bs-target="${target}"],${selector}[href="${target}"]`);
+      const queries = SELECTOR_LINK_ITEMS.split(',').map(selector => `${selector}[data-bs-target="${target}"],${selector}[href="~/stand-blog/${target}"]`);
       const link = SelectorEngine.findOne(queries.join(','), this._config.target);
       link.classList.add(CLASS_NAME_ACTIVE$1);
 
