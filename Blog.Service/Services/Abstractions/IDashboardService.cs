@@ -9,5 +9,6 @@ namespace Blog.Service.Services.Abstractions
     public interface IDashboardService
     {
         Task<List<int>> GetYearlyArticleCountes();
+        Task<int> GetTotalArticleCountes();
     }
 }
